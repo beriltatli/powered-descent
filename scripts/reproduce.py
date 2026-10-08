@@ -9,7 +9,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 STEPS = ["timing.py", "solve_once.py", "verify_battery.py", "sweep_tof.py", "nonconvex_compare.py",
-         "pointing_gap.py", "convergence.py", "baselines.py", "montecarlo.py", "ablation.py", "envelope.py",
+         "pointing_gap.py", "lcvx_conditions.py",
+         "convergence.py", "baselines.py", "montecarlo.py", "ablation.py", "envelope.py",
          "report.py"]
 
 

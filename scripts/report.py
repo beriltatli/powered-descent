@@ -156,6 +156,26 @@ def values() -> dict:
         v[f"pt_{k}_pen"] = f(pt[k]["heuristic_fuel_penalty_kg_median"], 2)
         v[f"pt_{k}_maxviol"] = f(pt[k]["heuristic_max_violation_deg"])
 
+    lc = _load("lcvx_conditions")
+    co, fb = lc["conditions"], lc["force_balance"]
+    v.update(lc_T=f(lc["T_s"], 0), lc_c3_rank=co["none_2007"]["condition3"]["rank"],
+             lc_c1_eig=f(co["none_2007"]["condition1"]["gramian_min_eig"]),
+             lc_c3_eig_tut=f"{co['mars_tutorial']['condition3']['gramian_min_eig']:.1e}",
+             lc_c3_eig_x100=f"{co['diagnostic_x100']['condition3']['gramian_min_eig']:.1e}",
+             lc_c3_sv_tut=f"{co['mars_tutorial']['condition3']['min_singular_value']:.1e}",
+             lc_fb45=f(fb["45deg"]["b_min_margin_N"], 0), lc_fb90=f(abs(fb["90deg"]["b_min_margin_N"]), 0),
+             lc_fb_a=f(fb["90deg"]["a_min_margin_N"], 0))
+    tfs = [r["tf"] for r in lc["rows"] if r["omega"] == "mars_tutorial" and "tf" in r]
+    v["lc_wt"] = f"{np.linalg.norm(co['mars_tutorial']['omega_rad_s']) * np.median(tfs):.1e}"
+    for w in ("none_2007", "mars_tutorial", "diagnostic_x100"):
+        for a in ("off", "90deg", "45deg"):
+            s = lc["summary"][f"{w}/{a}"]
+            tag = f"lc_{w}_{a}"
+            v[f"{tag}_solved"], v[f"{tag}_n"] = s["solved"], s["n"]
+            v[f"{tag}_mat"], v[f"{tag}_nrev"] = s["material_loose"], s["material_loose_not_reversal"]
+            v[f"{tag}_thr"], v[f"{tag}_gs"] = s["thrust_below_0p99_rho1"], s["glideslope_touching"]
+            v[f"{tag}_c2"], v[f"{tag}_fuel"] = s["condition2_holds"], f(s["median_fuel"])
+
     v.update(mc_runs=ms["closed"]["runs"], mc_r0=str(mc["r0"]), mc_v0=str(mc["v0"]),
              mc_margin=f(100 * mc["plan_mass_margin"], 2), mc_tgo=f(mc["poly_tgo"]), mc_tw=f(mc["tw"], 3))
     for m in ("closed", "open_loop", "polynomial", "polynomial_ideal", "constant_tw", "section_v_closed"):

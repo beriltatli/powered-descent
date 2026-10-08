@@ -38,6 +38,16 @@ pointing:                       # Section VI example
   random_instances: 200         # NOT IN PAPER — sample size for the loose-slack fraction
   seed: 7
 
+lcvx_conditions:                # Theorem 2 hypotheses, Malyuta et al. 2022 p.7-8 (secondary source for [96])
+  # eq. (108c), p.47: omega = (3.5 e_x + 2 e_z) 1e-3 deg/s with e_z vertical. Mapped to this repo's axes
+  # (axis 0 = altitude, axes 1-2 horizontal) as [2.0e-3, 3.5e-3, 0.0] deg/s.
+  omega_tutorial_deg_s: [2.0e-3, 3.5e-3, 0.0]
+  # NOT IN PAPER — the same omega exaggerated 100x, to see whether Condition 3 changes the discrete
+  # solution once the coupling it relies on is no longer negligible over one descent.
+  diagnostic_scale: 100.0
+  gramian_horizon_s: 75.0       # t_f* of the tutorial's example, p.47
+  pointing_half_angles_deg: [90.0, 45.0]   # 90: 2007 Section VI (gamma = 0); 45: as in results/pointing.json
+
 discretization:
   # NOT IN PAPER — the paper never states Delta-t. This repo fixes the node count N at compile time
   # and makes Delta-t = tf/N a cvxpy Parameter (see THEORY.md §6). N is chosen from the

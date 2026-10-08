@@ -85,7 +85,57 @@ Three findings beyond the paper:
 2. **The heuristic as printed is a no-op at γ = 0**, the paper's own example: κ2 is a norm, so κ2 ≥ γ = 0 always holds and case 1 (exact) is always taken (`tests/test_pointing_nonconvex.py`). The paper's Fig. 11 cannot have come from case 2 of the rule as printed.
 3. At 45°, where the heuristic does relax, it does not restore tightness here (material loose ${pt_45deg_heuristic62_mat} vs ${pt_45deg_exact61_mat}) and it violates the pointing cone, at a median fuel cost of ${pt_45deg_pen} kg.
 
-**The 2013 paper (Açıkmeşe, Carson & Blackmore, IEEE TCST) was not available.** `refs/acikmese_carson_blackmore_2013.pdf` is absent and an author-hosted copy could not be fetched. Its theorem and hypotheses are **not stated** in THEORY.md, by the rule that the papers are the specification. That success criterion is missed. What is shown is the gap it was written to close.
+### What the 2013 result requires, and whether this model meets it
+
+**The 2013 paper (Açıkmeşe, Carson & Blackmore, IEEE TCST) is still not in `refs/`.** Its result is stated
+here from a secondary source: Malyuta et al., *Convex Optimization for Trajectory Generation* (2022 tutorial,
+`refs/malyuta_2022_tutorial.pdf`). The tutorial's Theorem 2 (p.8) cites the 2013 paper jointly with Carson
+et al. 2011. The NASA Tech Brief in `refs/` only asserts the result. THEORY.md §8 has the exact statements.
+
+**What the relaxation is.** The 2013 relaxation of the pointing constraint is the same half-space as the
+2007 paper's (61). What 2013 adds is a set of hypotheses under which that relaxation is lossless:
+Conditions 1–3 of the tutorial.
+
+**How this repo's model fares** (`results/lcvx_conditions.json`):
+
+- **Condition 1** (controllability of {A, B}) holds.
+- **Condition 2** (transversality, here σ(tf) ≠ 0) holds on every solve: on ${lc_none_2007_90deg_c2} of ${lc_none_2007_90deg_solved} with the 90° cone, and it is guaranteed by (51).
+- **Condition 3** ({A, BN} controllable, with N the thrust directions orthogonal to the cone axis) **fails**.
+  - The 2007 dynamics have no planet rotation, and the vertical channel cannot be reached by horizontal thrust: rank ${lc_c3_rank} of 6.
+  - The tutorial (p.46) says it holds as long as ω × ê_z ≠ 0, that is, only if the planet rotates about an axis other than the local vertical.
+  - With the tutorial's Mars rotation (its eq. 108c) it holds in exact arithmetic. But the smallest eigenvalue of the controllability Gramian over ${lc_T} s is at round-off level (${lc_c3_eig_tut}); Condition 1's is ${lc_c1_eig}.
+- **The tutorial's glide-slope test (106)**, which shows the glide slope can only touch instantaneously:
+  - holds for a 45° cone (worst margin ${lc_fb45} N);
+  - **fails for the paper's 90° cone** ((106b) is violated by ${lc_fb90} N).
+  - In practice no solution in any of these batteries touched the glide slope.
+
+**So the 2007 Section VI setting lies outside the 2013 guarantee.** The loose slack measured above does not contradict it.
+
+**Does meeting Condition 3 remove the loose slack?** Same ${pt_n} instances, same N = ${N}. Rotation was added to the dynamics.
+
+| Rotation | Cone | Material loose slack | of which not a reversal | Commanded thrust < 0.99 ρ1 | Median fuel (kg) |
+|:--|:--|--:|--:|--:|--:|
+| none (2007 model; Condition 3 fails) | none | ${lc_none_2007_off_mat} | ${lc_none_2007_off_nrev} | ${lc_none_2007_off_thr} | ${lc_none_2007_off_fuel} |
+| none | 90° | ${lc_none_2007_90deg_mat} | ${lc_none_2007_90deg_nrev} | ${lc_none_2007_90deg_thr} | ${lc_none_2007_90deg_fuel} |
+| none | 45° | ${lc_none_2007_45deg_mat} | ${lc_none_2007_45deg_nrev} | ${lc_none_2007_45deg_thr} | ${lc_none_2007_45deg_fuel} |
+| Mars, tutorial (108c) (Condition 3 holds, barely) | none | ${lc_mars_tutorial_off_mat} | ${lc_mars_tutorial_off_nrev} | ${lc_mars_tutorial_off_thr} | ${lc_mars_tutorial_off_fuel} |
+| Mars, tutorial | 90° | ${lc_mars_tutorial_90deg_mat} | ${lc_mars_tutorial_90deg_nrev} | ${lc_mars_tutorial_90deg_thr} | ${lc_mars_tutorial_90deg_fuel} |
+| Mars, tutorial | 45° | ${lc_mars_tutorial_45deg_mat} | ${lc_mars_tutorial_45deg_nrev} | ${lc_mars_tutorial_45deg_thr} | ${lc_mars_tutorial_45deg_fuel} |
+| 100× tutorial (diagnostic, NOT IN PAPER; Gramian eigenvalue ${lc_c3_eig_x100}) | none | ${lc_diagnostic_x100_off_mat} | ${lc_diagnostic_x100_off_nrev} | ${lc_diagnostic_x100_off_thr} | ${lc_diagnostic_x100_off_fuel} |
+| 100× tutorial | 90° | ${lc_diagnostic_x100_90deg_mat} | ${lc_diagnostic_x100_90deg_nrev} | ${lc_diagnostic_x100_90deg_thr} | ${lc_diagnostic_x100_90deg_fuel} |
+| 100× tutorial | 45° | ${lc_diagnostic_x100_45deg_mat} | ${lc_diagnostic_x100_45deg_nrev} | ${lc_diagnostic_x100_45deg_thr} | ${lc_diagnostic_x100_45deg_fuel} |
+
+The 45° rows meet every hypothesis we can check once rotation is present: Conditions 1–3, and (106).
+
+**What the measurements show:**
+
+- **With Mars's real rotation, satisfying Condition 3 changes nothing measurable.** The coupling it relies on is |ω|·tf = ${lc_wt} rad over a median descent.
+- **Exaggerated 100×, the coupling cuts the loose slack but does not remove it.**
+  - At 90°, every remaining material case is a reversal, the zero-order-hold artefact that also appears with no pointing at all.
+  - At 45°, ${lc_diagnostic_x100_45deg_mat} of ${pt_n} instances are still loose by the Section VI mechanism, even though every hypothesis listed above holds.
+- **The theorem is a continuous-time statement, and the tutorial gives no guarantee after discretization.** This is the gap these numbers fall into.
+- **Reading of the result (mine, not the sources'):** at N = ${N}, Condition 3 matters only through a coupling strong enough to act within one descent. Real Mars rotation is not strong enough.
+- **The 2013 hypotheses are therefore stated, from a secondary source, and checked.** The primary paper's exact wording remains unverified.
 
 ## 4. Solve-time tail
 
@@ -169,7 +219,7 @@ Initial downrange position × initial horizontal velocity, ${env_grid} grid, alt
 | ≥ 95 % below 1 m/s | ${crit_speed} (${closed_below_speed}) |
 | Recursive feasibility > 99 % | ${crit_rf} (${rf_res} of re-solves; strict fixed-time ${strict_res}) |
 | Envelope with and without mass error | produced |
-| Pointing: loose fraction, Section VI heuristic, 2013 hypotheses | first two done; **2013 hypotheses missed** (paper not available) |
+| Pointing: loose fraction, Section VI heuristic, 2013 hypotheses | done; 2013 hypotheses stated from a **secondary source** (Malyuta et al. tutorial) and checked: Condition 3 fails in the 2007 model; the 2013 paper itself is still not in refs/ |
 
 ## 9. Choices not taken from the papers
 
@@ -184,4 +234,4 @@ All marked `NOT IN PAPER` in config.yaml: the speed bound V̂ = 150 m/s (never a
 - One vehicle, one altitude for the envelope; envelope corners at ±5 % stand in for the whole interval.
 - Timings are on a laptop CPU with a general-purpose solver through CVXPY; a flight computer with a custom solver would differ in both directions.
 - Fuel is not a constraint of the guidance problem (Remark 8), and the guidance has no fuel measurement independent of its mass belief; all closed-loop failures are fuel exhaustion.
-- The 2013 theorem is not implemented or checked.
+- The 2013 theorem's hypotheses come from the Malyuta et al. tutorial, not from the 2013 paper itself, and the tutorial gives no proof. Rotation enters the guidance model only in the Theorem 2 experiment; the Monte Carlo and envelope use the non-rotating 2007 model.

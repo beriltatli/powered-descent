@@ -126,7 +126,7 @@ class PDGProblem:
         rho1 = veh.rho1 if rho1 is None else rho1
         rho2 = veh.rho2 if rho2 is None else rho2
         dt = tf / N
-        A, B = discretize(dt, veh.alpha)
+        A, B = discretize(dt, veh.alpha, veh.omega)
         self.p_A.value, self.p_B.value = A, B
         self.p_gin.value = B @ np.concatenate([veh.g, [0.0]])
         self.p_dt.value = dt

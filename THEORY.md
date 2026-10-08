@@ -164,18 +164,96 @@ constraint. The paper states plainly that the convexification **does not carry o
 Paper's result: the pointing violation drops from 90° to under 5°, at about 10 kg more fuel (p.1365).
 Implemented in `pointing/`, with the loose-slack fraction measured with and without the heuristic.
 
-## 8. Açıkmeşe, Carson & Blackmore (2013): NOT EXTRACTED
+## 8. Açıkmeşe, Carson & Blackmore (2013): stated from a secondary source
 
-`refs/acikmese_carson_blackmore_2013.pdf` is **not present** in this repository. An attempt to fetch an
-author-hosted copy failed (connection refused). In line with the rule that the papers are the specification,
-**this section does not state the 2013 theorem or its hypotheses from memory.**
+**The 2013 paper itself (IEEE TCST 21(6), 2104–2113, doi 10.1109/tcst.2012.2237346) is still not in
+`refs/`.** Two sources about it are:
 
-To complete it, place the PDF in `refs/` and extract the following verbatim, with equation numbers:
+- `refs/carson_2013_nasa_techbrief.pdf` (NASA Tech Briefs, Feb. 2013, p.25, NPO-47853). It asserts that "a
+  relaxation of the thrust-pointing constraint also provides a lossless convexification". It gives no
+  theorem and no hypotheses.
+- `refs/malyuta_2022_tutorial.pdf` (Malyuta, Reynolds, Szmuk, Lew, Bonalli, Pavone, Açıkmeşe, *Convex
+  Optimization for Trajectory Generation*, arXiv:2106.09125v1). It states the pointing result as its
+  Theorem 2 (p.8) and cites **[87, 96] together**: [87] is Carson, Açıkmeşe & Blackmore, ACC 2011, and [96]
+  is the 2013 paper. It does not say which part comes from which.
 
-- the main lossless-convexification theorem with pointing constraints;
-- the condition on the pointing angle;
-- the controllability and normality assumptions;
-- how its relaxed problem differs from Problem 2 above.
+Everything below is the tutorial's statement, read from rendered pages. Equation and page numbers in this
+section are the tutorial's. **It is not a transcription of [96].**
 
-What this repo shows empirically (Phase 4) is the gap that paper addresses: with (61) on and the 2007
-relaxation, the slack goes loose on a measurable fraction of instances.
+**The relaxation (p.8, sidebar p.9).** The setting is restricted to ζ = 1 (a running cost) and g0 = g1. The
+pointing constraint (9d) is `n̂uᵀu ≥ n̂g g0(u)`. It is relaxed to (10d) `g0(u) ≤ σ` together with (10e)
+`n̂uᵀu ≥ σ n̂g`. With `g0 = ‖·‖₂` and `n̂g = cos θmax`, (10e) is exactly this repo's (61), with `v = n̂u` and
+`γ = cos θmax`. It is a half-space in (u, σ), so it stays convex even for θmax > 90°.
+
+**So the 2013 relaxation is the same constraint the 2007 paper writes as (61).** What 2013 adds is a set of
+hypotheses under which it is lossless. Section 7 shows that the 2007 paper says it is not lossless in
+general.
+
+**Theorem 2 (p.8).** "The solution of Problem 10 is globally optimal for Problem 9 if Conditions 1, 2, and 3
+hold." Its hypotheses are:
+
+- **Assumption 1 (p.7).** If any part of the terminal state is constrained, ∇ₓb[tf] has full row rank.
+- **Assumption 2 (p.7).** The running cost is positive definite: ℓ(z) > 0 for z ≠ 0.
+- **Condition 1 (p.7).** "The pair {A(·), B(·)} must be totally controllable." For LTI dynamics this is the
+  Kalman rank test.
+- **Condition 2 (eq. 8).** `m_LCvx = [∇ₓm[tf]; ∇ₜm[tf] + ζℓ(σ(tf))]` and the columns of
+  `B_LCvx = [∇ₓb[tf]ᵀ; ∇ₜb[tf]ᵀ]` must be linearly independent. This is a transversality condition.
+- **Condition 3 (p.8).** "Let N ∈ ℝ^{m×(m−1)} be a matrix whose columns span the nullspace of n̂u in (9d).
+  The pair {A(·), B(·)N} must be totally controllable."
+
+**What the tutorial adds around Theorem 2. These are not hypotheses of Theorem 2, and none of them is
+attributed to [96]:**
+
+- Problem 9 has **no state constraints**. For the glide slope, the tutorial's own rocket example (p.46–47)
+  argues that it is only instantaneously active. The argument is a force balance plus bang-bang thrust [45].
+  It is the conservative sufficient test (106), for all θ ∈ [π/2 − γp − γgs, π/2 + γp − γgs]:
+  - (106a) `ρmin cos θ < m_dry‖g‖ sin γgs`;
+  - (106b) `ρmax cos θ > m_wet‖g‖ sin γgs`.
+- For general convex state constraints, Theorem 5 (p.14–15) needs them to be "activated at isolated time
+  instances".
+- For the rotating-planet model (104c)/(105), p.46 says: "Condition 3 holds as long as ω×ê_z ≠ 0, which
+  means that the planet does not rotate about the local vertical."
+- Every result is for continuous time. The tutorial gives no losslessness guarantee after discretization;
+  its evidence is numerical (p.22, p.47).
+- p.21 mentions that, for pointing, "the dynamical system can be perturbed by an arbitrarily small amount to
+  induce normality". It does not say whether Theorem 2 needs such a perturbation.
+
+**Not available from either source:**
+
+- the proof;
+- any bound on θmax beyond the geometry;
+- whether tf is free or fixed in [96];
+- any hypothesis of [96] that the tutorial does not restate.
+
+### Hypotheses checked for this repo's model
+
+Code: `verify/lcvx_conditions.py`. Tests: `tests/test_lcvx_conditions.py`. Results:
+`results/lcvx_conditions.json`. Following p.46, z is treated as a fictitious state, so x = (r, ṙ) ∈ ℝ⁶,
+n̂u = v = +altitude, and N spans the two horizontal axes.
+
+- **Condition 1 holds.** A is a double integrator and B = [0; I], so the rank is 6.
+- **Condition 2 holds on every solution.** Here m = 0, ℓ(σ) = σ (cost (47)) and b = x(tf), so
+  `m_LCvx = [0; σ(tf)]` and `B_LCvx = [I₆; 0]`. These are independent exactly when σ(tf) ≠ 0. The left side
+  of (51) is `μ1(1 − δz + δz²/2) ≥ μ1/2 > 0`, so σ(tf) > 0 is guaranteed. The tutorial reaches the same
+  test on p.47 (107).
+- **Condition 3 fails in the 2007 model.** Equation (1) has no planet rotation. With B N = [0; N], only the
+  horizontal channels are reachable, and the vertical double integrator is not: the rank is 4 of 6. The same
+  holds for any rotation about the vertical, as p.46 says. With the tutorial's Mars rotation (108c), rank 6
+  holds in exact arithmetic. But the smallest eigenvalue of the controllability Gramian over 75 s is at
+  round-off level: Condition 3 holds only by a coupling of order |ω| ≈ 1e-4 rad/s.
+- **(106) holds for a 45° cone** (both inequalities). **For the paper's 90° cone, (106b) fails**; (106a)
+  holds.
+
+**Consequence.** The 2007 Section VI example (γ = 0, no rotation) is outside Theorem 2 on two counts:
+Condition 3 and (106b). So the loose slack measured in Phase 4 does not contradict the 2013 result; the
+2013 result does not apply to it.
+
+**Does Condition 3 actually help?** `scripts/lcvx_conditions.py` adds rotation to the dynamics, using
+(104c) through `dynamics.model.continuous_matrices`. It then re-runs the same 200 pointing instances under
+three settings:
+
+1. no rotation (the 2007 model);
+2. the tutorial's ω;
+3. that ω scaled 100× (NOT IN PAPER, a diagnostic).
+
+The counts are in REPORT.md §3.

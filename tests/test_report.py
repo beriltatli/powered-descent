@@ -27,7 +27,9 @@ def test_template_has_no_literal_numbers_outside_placeholders():
                "1e-7", "1356", "1357", "1361", "1363", "1364", "1365", "1359", "1360", "1362", "1355",
                "1358", "24", "23", "38", "39", "8",
                # design constants and thresholds from config.yaml or the brief, not results
-               "0.97", "0.99", "150", "1e-9", "80", "120", "200"}
+               "0.97", "0.99", "150", "1e-9", "80", "120", "200",
+               # Malyuta et al. tutorial: equation number and publication years of the cited sources
+               "106", "2011", "2022"}
     tpl = (ROOT / "scripts" / "report_template.md").read_text()
     prose = re.sub(r"\$\{?\w+\}?", "", tpl)
     nums = set(re.findall(r"(?<![\w.$])\d+(?:\.\d+)?(?:e-?\d+)?(?![\w])", prose))
