@@ -1,75 +1,99 @@
-# PolyForm Noncommercial License 1.0.0
+Personal Use Only License
 
-<https://polyformproject.org/licenses/noncommercial/1.0.0>
-
-## Acceptance
-
-In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.
-
-## Copyright License
-
-The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose.  However, you may only distribute the software according to [Distribution License](#distribution-license) and make changes or new works based on the software according to [Changes and New Works License](#changes-and-new-works-license).
-
-## Distribution License
-
-The licensor grants you an additional copyright license to distribute copies of the software.  Your license to distribute covers distributing the software with changes and new works permitted by [Changes and New Works License](#changes-and-new-works-license).
-
-## Notices
-
-You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with `Required Notice:` that the licensor provided with the software.  For example:
-
-> Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
-
-## Changes and New Works License
-
-The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.
-
-## Patent License
-
-The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.
-
-## Noncommercial Purposes
-
-Any noncommercial purpose is a permitted purpose.
-
-## Personal Uses
-
-Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.
-
-## Noncommercial Organizations
-
-Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.
-
-## Fair Use
-
-You may have "fair use" rights for the software under the law. These terms do not limit them.
-
-## No Other Rights
-
-These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else.  These terms do not imply any other licenses.
-
-## Patent Defense
-
-If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.
-
-## Violations
-
-The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice.  Otherwise, all your licenses end immediately.
-
-## No Liability
-
-***As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.***
-
-## Definitions
-
-The **licensor** is the individual or entity offering these terms, and the **software** is the software the licensor makes available under these terms.
-
-**You** refers to the individual or entity agreeing to these terms.
-
-**Your company** is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.  **Control** means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise.  Control can be direct or indirect.
-
-**Your licenses** are all the licenses granted to you for the software under these terms.
-
-**Use** means anything you do with the software requiring one of your licenses.
+Copyright (c) 2026 beriltatli. All rights reserved.
 
 Required Notice: Copyright 2026 beriltatli
+
+1. Definitions
+
+"Licensor" means the copyright holder named above.
+
+"Software" means everything in this repository, including source code, tests, configuration, documentation,
+results, figures and reports, any part of it, and any modified version or work based on it.
+
+"Individual" means a single natural person acting solely on their own behalf.
+
+"Organization" means any company, partnership, sole proprietorship acting in a business capacity, university,
+school, research institute, laboratory, government body, military body, non-profit organization, foundation,
+association, club, or any other legal entity or group of persons, whatever its purpose or source of funding.
+
+"Personal Use" means private study, learning, experimentation and hobby use by an Individual, with no
+commercial purpose and not for, on behalf of, or for the benefit of any Organization.
+
+2. License Grant
+
+Subject to full and continuing compliance with this license, the Licensor grants each Individual a personal,
+non-exclusive, non-transferable, non-sublicensable, revocable license to download, read, run, study and modify
+the Software on devices that Individual owns or controls, solely for Personal Use.
+
+This is the only permission granted. All rights not expressly granted are reserved by the Licensor.
+
+3. Prohibited Uses
+
+Each of the following is prohibited and is outside the scope of this license:
+
+(a) Organizational use. Any use by, for, on behalf of, or for the benefit of an Organization, including use by
+    its employees, contractors, students, members or volunteers acting in that capacity, use on its equipment or
+    networks for its work, and use in its research, development, teaching, training, coursework, theses,
+    evaluations, products or internal operations.
+
+(b) Commercial use. Selling, licensing, renting, lending or otherwise providing the Software or access to it;
+    offering it or its output as a product or service; using it in consulting or paid work; and using it to
+    obtain revenue, funding, grants, customers, contracts or any other commercial advantage.
+
+(c) Advertising and promotion. Using the Software, its output, or any part of it in advertising, marketing,
+    public relations, sponsorship, endorsements, or monetized content of any kind, including monetized videos,
+    streams, posts, articles, newsletters and courses.
+
+(d) Distribution and publication. Publishing, uploading, mirroring, sharing or otherwise making available the
+    Software or any modified version of it to any other person, on the internet or by any other means, including
+    public or private repositories, package registries, file-sharing services, websites and social media.
+
+(e) Machine learning. Using the Software as training, fine-tuning or evaluation data for any machine learning or
+    artificial intelligence system.
+
+(f) Notices and endorsement. Removing or altering this license or any copyright notice, or using the Licensor's
+    name to endorse or promote anything.
+
+Where the terms of service of the platform hosting this repository grant its users a right to view or fork the
+repository on that platform, that right exists only to the extent those terms strictly require it. It does not
+grant any further right under this license, and every restriction above applies to any such copy.
+
+4. Contributions
+
+The Licensor does not accept contributions. Pull requests, issues, patches and other submissions may be closed
+or deleted without review. Submitting anything does not give the submitter any right in the Software.
+
+5. Other Licenses
+
+Organizational, commercial or any other use not permitted by Section 2 requires a separate written agreement
+signed by the Licensor. No such permission is implied by conduct, by silence, or by the Software being publicly
+visible.
+
+6. Third-Party Material
+
+Third-party libraries used by the Software are governed by their own licenses. Published papers cited by the
+Software are the property of their respective copyright holders and are not licensed by this document.
+
+7. Termination
+
+Any breach of this license terminates all rights granted under it immediately and automatically, without notice
+and without any period to cure. On termination, the licensee must stop all use of the Software and permanently
+delete every copy in their possession or control.
+
+8. Not for Operational Use
+
+The Software is a research simulation. It is not certified, validated or intended for controlling any real
+vehicle, aircraft, spacecraft or other physical system, and must not be used for that purpose.
+
+9. No Warranty and No Liability
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OR CONDITION OF ANY KIND, EXPRESS OR IMPLIED. TO THE MAXIMUM
+EXTENT PERMITTED BY LAW, THE LICENSOR SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGE OR OTHER LIABILITY ARISING FROM
+OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+10. Mandatory Law
+
+Nothing in this license limits any right that applicable law grants and does not allow to be waived. If any
+provision is held unenforceable, it shall be enforced to the maximum extent permitted, and the remaining
+provisions stay in effect.
