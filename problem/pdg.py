@@ -16,6 +16,10 @@ class Options:
     final_thrust_dir: tuple | None = (1.0, 0.0, 0.0)   # second equality of (37)
     pointing: bool = False            # (61)/(62) with a per-node gamma Parameter
     pointing_axis: tuple = (1.0, 0.0, 0.0)
+    # Recovery variant for closed loop only: glide slope and speed bound become soft, with slack
+    # penalized by soft_weight per metre (per m/s) in the cost. Never used for the open-loop results.
+    soft_state: bool = False
+    soft_weight: float = 100.0
 
 
 @dataclass
@@ -87,14 +91,21 @@ class PDGProblem:
                  + 0.5 * cp.square(cp.multiply(P["lo_s"], z) - P["lo_w"]) <= S]  # (51) left
         cons += [S <= P["up_c0"] + cp.multiply(P["up_c1"], z)]                    # (51) right
         cons += [z >= P["z_lo"], z <= P["z_hi"]]                                  # (52)
+        penalty = 0
+        if opts.soft_state:
+            s_gs, s_v = cp.Variable(N, nonneg=True), cp.Variable(N, nonneg=True)
+            penalty = opts.soft_weight * (cp.sum(s_gs) + cp.sum(s_v))
+            self.s_gs, self.s_v = s_gs, s_v
+        else:
+            s_gs = s_v = 0
         if opts.glideslope_deg is not None:
             # (11): ||(r2, r3)|| <= tan(theta_alt) r1, in this repo's 0-based axes.
             tan_t = np.tan(np.deg2rad(opts.glideslope_deg))
-            cons += [cp.norm(Y[1:, 1:3], 2, axis=1) <= tan_t * Y[1:, 0]]
+            cons += [cp.norm(Y[1:, 1:3], 2, axis=1) <= tan_t * Y[1:, 0] + s_gs]
         if opts.subsurface:
             cons += [Y[1:, 0] >= 0]                                               # (7)
         if opts.vmax is not None:
-            cons += [cp.norm(Y[1:, 3:6], 2, axis=1) <= opts.vmax]                 # (10)
+            cons += [cp.norm(Y[1:, 3:6], 2, axis=1) <= opts.vmax + s_v]           # (10)
         cons += [Y[N, 0:6] == 0]                                                  # (5)
         if opts.final_thrust_dir is not None:
             # (37) second equality, u(tf) = sigma(tf) n_f, imposed on the last held control.
@@ -105,7 +116,7 @@ class PDGProblem:
             # (61) v^T u_k >= gamma sigma_k; the heuristic (62) swaps gamma for kappa_2k per node.
             cons += [U @ v >= cp.multiply(self.p_gamma, S)]
 
-        self.prob = cp.Problem(cp.Minimize(self.p_dt * cp.sum(S)), cons)          # (47)
+        self.prob = cp.Problem(cp.Minimize(self.p_dt * cp.sum(S) + penalty), cons)  # (47)
         assert self.prob.is_dpp()
         self.compile_s: dict[str, float] = {}
 
@@ -164,6 +175,9 @@ class PDGProblem:
             sol.Y = self.Y.value.copy()
             sol.U = self.U.value.copy()
             sol.S = self.S.value.copy()
-            sol.cost = float(self.prob.value)
+            sol.cost = float(self.p_dt.value * sol.S.sum())
+            sol.extra["objective"] = float(self.prob.value)
+            if self.opts.soft_state:
+                sol.extra["soft_slack_max"] = float(max(self.s_gs.value.max(), self.s_v.value.max()))
         sol.extra["first_call"] = first
         return sol

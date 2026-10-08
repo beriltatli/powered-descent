@@ -37,13 +37,17 @@ def initial_state_violations(problem: PDGProblem, r0, v0) -> list[str]:
 
 
 def algorithm1(problem: PDGProblem, r0, v0, m0: float, m_fuel: float, coarse: int = 14,
-               tol: float = 0.05, bounds: tuple[float, float] | None = None, **solve_kw) -> TofResult:
+               tol: float = 0.05, bounds: tuple[float, float] | None = None, solve_fn=None,
+               **solve_kw) -> TofResult:
     """Algorithm 1 (p.1361) as a line search over tf with N fixed and Delta-t = tf/N.
 
     The paper fixes Delta-t and searches the integer N; both are a 1-D search over tf for the minimum of
     beta(tf), with beta = inf where Problem 4 is infeasible (58). A coarse grid brackets the minimum,
     then golden-section refines it; golden-section is only valid if beta is unimodal, which is
     Remark 10's observation and is checked separately by tof/sweep.py.
+
+    solve_fn(tf) -> Solution replaces the plain Problem 4 solve, e.g. for the Section VI heuristic,
+    which solves twice per tf.
     """
     r0, v0 = np.asarray(r0, float), np.asarray(v0, float)
     bad = initial_state_violations(problem, r0, v0)
@@ -56,8 +60,9 @@ def algorithm1(problem: PDGProblem, r0, v0, m0: float, m_fuel: float, coarse: in
     def beta(tf):
         if tf in cache:
             return cache[tf][0]
-        s = problem.solve(r0, v0, m0, tf, **solve_kw)
-        b = s.cost if s.ok else np.inf
+        s = solve_fn(tf) if solve_fn else problem.solve(r0, v0, m0, tf, **solve_kw)
+        # The soft-state recovery problem ranks tf by its full objective (fuel plus slack penalty).
+        b = s.extra.get("objective", s.cost) if s.ok else np.inf
         cache[tf] = (b, s)
         probes.append((float(tf), float(b), s.status))
         return b
@@ -93,7 +98,8 @@ def algorithm1(problem: PDGProblem, r0, v0, m0: float, m_fuel: float, coarse: in
             d = a + INVPHI * (b - a)
             fd = beta(d)
     tf_best = min(cache, key=lambda t: cache[t][0])
-    b_best, sol = cache[tf_best]
+    _, sol = cache[tf_best]
+    b_best = sol.cost
     fuel = m0 * (1.0 - np.exp(-problem.veh.alpha * b_best))
     # Algorithm 1 cases 1 and 2a: fuel is checked after the solve (Remark 8), not constrained inside it.
     cls = "valid" if fuel <= m_fuel else "insufficient_fuel"

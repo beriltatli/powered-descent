@@ -1,0 +1,2167 @@
+{
+ "summary": {
+  "N": 15,
+  "instances": 20,
+  "starts": 5,
+  "skipped_not_valid": 3,
+  "taylor": {
+   "instances_convex_at_least_as_good": 20,
+   "instances_no_feasible_start": 0,
+   "starts_feasible": 60,
+   "starts_total": 100,
+   "median_rel_gap_best_start": 4.5555530486227865e-08,
+   "max_convex_point_violation": 1.629831221716671e-05
+  },
+  "exact": {
+   "instances_convex_at_least_as_good": 1,
+   "instances_no_feasible_start": 1,
+   "starts_feasible": 66,
+   "min_rel_gap_best_start": -0.0005918305727866804,
+   "max_convex_point_violation": 5.119866624880842e-06,
+   "from_convex_rel_improvement_max": 0.0005918305727748993
+  }
+ },
+ "instances": [
+  {
+   "r0": [
+    640.8411523083937,
+    -740.452101201404,
+    2689.9707197506505
+   ],
+   "v0": [
+    -27.811640720361716,
+    -10.480550101616721,
+    2.27800436065253
+   ],
+   "tf": 54.3128767299936,
+   "beta_convex": 296.6975823622809,
+   "convex_slack_max_gap": -4.440892098500626e-16,
+   "taylor_convex_point_violation": 7.971487567814961e-07,
+   "taylor_starts": [
+    {
+     "beta": 296.6975999779787,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 107
+    },
+    {
+     "beta": 296.62731176681837,
+     "feasible": false,
+     "violation": 15.373526412479169,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 296.6975999779754,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 580
+    },
+    {
+     "beta": 296.6975999779871,
+     "feasible": true,
+     "violation": 1.554312234475219e-14,
+     "success": true,
+     "nit": 316
+    },
+    {
+     "beta": 296.69759997797814,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 980
+    }
+   ],
+   "taylor_seconds": 5.732526915999188,
+   "taylor_best": 296.6975999779754,
+   "taylor_n_feasible": 4,
+   "taylor_from_convex": {
+    "beta": 296.69759997798195,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 7.971487594460314e-07,
+   "exact_starts": [
+    {
+     "beta": 296.6716228204047,
+     "feasible": true,
+     "violation": 6.821210263296962e-13,
+     "success": true,
+     "nit": 838
+    },
+    {
+     "beta": 147.03874832613877,
+     "feasible": false,
+     "violation": 58247.86304584755,
+     "success": false,
+     "nit": 48
+    },
+    {
+     "beta": 296.67162282040874,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 583
+    },
+    {
+     "beta": 296.67162282040374,
+     "feasible": true,
+     "violation": 6.821210263296962e-13,
+     "success": true,
+     "nit": 188
+    },
+    {
+     "beta": 161.3373611984092,
+     "feasible": false,
+     "violation": 40480.964231781894,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "exact_seconds": 5.3736480829975335,
+   "exact_best": 296.67162282040374,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 296.6716228203988,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1864.8731713067716,
+    -832.2215196375784,
+    -1472.6938461527593
+   ],
+   "v0": [
+    -21.422025038101232,
+    5.44541628656571,
+    3.33940145266014
+   ],
+   "tf": 47.88704950092937,
+   "beta_convex": 236.9790178658962,
+   "convex_slack_max_gap": -4.085620730620576e-14,
+   "taylor_convex_point_violation": 6.066673741145223e-08,
+   "taylor_starts": [
+    {
+     "beta": 239.48608731625052,
+     "feasible": false,
+     "violation": 24604.891485915792,
+     "success": false,
+     "nit": 42
+    },
+    {
+     "beta": 129.08629659315525,
+     "feasible": false,
+     "violation": 52763.585466105425,
+     "success": false,
+     "nit": 71
+    },
+    {
+     "beta": 236.9790188295246,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 56
+    },
+    {
+     "beta": 236.9790188295239,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 66
+    },
+    {
+     "beta": 236.97901882952297,
+     "feasible": true,
+     "violation": 3.410605131648481e-13,
+     "success": true,
+     "nit": 68
+    }
+   ],
+   "taylor_seconds": 0.615317125004367,
+   "taylor_best": 236.97901882952297,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 236.97901882952192,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 9.094947017729282e-13,
+   "exact_starts": [
+    {
+     "beta": 134.2483294629809,
+     "feasible": false,
+     "violation": 49910.5353621741,
+     "success": false,
+     "nit": 24
+    },
+    {
+     "beta": 236.8768703636853,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 74
+    },
+    {
+     "beta": 131.0925051199164,
+     "feasible": false,
+     "violation": 41188.55008312098,
+     "success": false,
+     "nit": 47
+    },
+    {
+     "beta": 236.8768703636884,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 70
+    },
+    {
+     "beta": 236.87687036368428,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 73
+    }
+   ],
+   "exact_seconds": 0.5619669589941623,
+   "exact_best": 236.87687036368428,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 236.8768703636847,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1532.6963433830135,
+    -163.06302477678148,
+    1204.3879174344704
+   ],
+   "v0": [
+    -64.9869773454523,
+    36.62005892248101,
+    50.770168601738284
+   ],
+   "tf": 49.77092282223643,
+   "beta_convex": 321.5586118971674,
+   "convex_slack_max_gap": 1.7763568394002505e-15,
+   "taylor_convex_point_violation": 1.2358161427528103e-07,
+   "taylor_starts": [
+    {
+     "beta": 321.5589703366707,
+     "feasible": false,
+     "violation": 7.224183762551267e-05,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 321.5591241877009,
+     "feasible": true,
+     "violation": 3.141200366485464e-08,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 321.5587117585541,
+     "feasible": true,
+     "violation": 4.521155005932087e-08,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 146.04701486074137,
+     "feasible": false,
+     "violation": 48517.40224507444,
+     "success": false,
+     "nit": 7
+    },
+    {
+     "beta": 321.55867423107344,
+     "feasible": true,
+     "violation": 1.4470013987022412e-07,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "taylor_seconds": 7.587017500001821,
+   "taylor_best": 321.55867423107344,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 321.5586155471901,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.2358161693981629e-07,
+   "exact_starts": [
+    {
+     "beta": 321.55527893835176,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 712
+    },
+    {
+     "beta": 321.5555691372153,
+     "feasible": true,
+     "violation": 8.743852369799541e-07,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 321.55536149948455,
+     "feasible": false,
+     "violation": 5.008594285263603e-05,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 321.5553246440475,
+     "feasible": true,
+     "violation": 2.2761074975756827e-06,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 321.55528609892065,
+     "feasible": true,
+     "violation": 2.4424480216111988e-09,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "exact_seconds": 8.6790167500003,
+   "exact_best": 321.55527893835176,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 321.5552789478738,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1624.3842522134187,
+    356.63606350891587,
+    1053.3287261034511
+   ],
+   "v0": [
+    6.351467975860938,
+    -2.945462225874511,
+    14.353444578995678
+   ],
+   "tf": 48.32292453348847,
+   "beta_convex": 221.9498455990575,
+   "convex_slack_max_gap": -3.6770586575585185e-13,
+   "taylor_convex_point_violation": 2.228104074575299e-07,
+   "taylor_starts": [
+    {
+     "beta": 226.49310573948975,
+     "feasible": false,
+     "violation": 34037.375418803786,
+     "success": false,
+     "nit": 2
+    },
+    {
+     "beta": 259.5899792694389,
+     "feasible": false,
+     "violation": 9408.226128260976,
+     "success": false,
+     "nit": 6
+    },
+    {
+     "beta": 221.9498501645681,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 84
+    },
+    {
+     "beta": 221.94985016456704,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 136
+    },
+    {
+     "beta": 130.28938996509564,
+     "feasible": false,
+     "violation": 3922.8278330009634,
+     "success": false,
+     "nit": 319
+    }
+   ],
+   "taylor_seconds": 1.1880819580037496,
+   "taylor_best": 221.94985016456704,
+   "taylor_n_feasible": 2,
+   "taylor_from_convex": {
+    "beta": 221.94985016456837,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 8.344613888766617e-11,
+   "exact_starts": [
+    {
+     "beta": 221.8184888948082,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 140.66725329085614,
+     "feasible": false,
+     "violation": 17175.74893081261,
+     "success": false,
+     "nit": 104
+    },
+    {
+     "beta": 221.81848889480835,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 47
+    },
+    {
+     "beta": 221.8184888948067,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 62
+    },
+    {
+     "beta": 221.81848889480685,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 67
+    }
+   ],
+   "exact_seconds": 0.6845197920047212,
+   "exact_best": 221.8184888948067,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 221.81848889480932,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    949.0863176809626,
+    -908.5354941278498,
+    773.0998240168987
+   ],
+   "v0": [
+    -0.4582798045702252,
+    8.088855577947403,
+    20.549686487932895
+   ],
+   "tf": 40.886220632291426,
+   "beta_convex": 202.54412959594404,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 5.652377819131971e-07,
+   "taylor_starts": [
+    {
+     "beta": 202.544137648364,
+     "feasible": true,
+     "violation": 3.410605131648481e-13,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 109.69244437605914,
+     "feasible": false,
+     "violation": 14192.25866440439,
+     "success": false,
+     "nit": 772
+    },
+    {
+     "beta": 110.16167398521576,
+     "feasible": false,
+     "violation": 21711.77512232467,
+     "success": false,
+     "nit": 12
+    },
+    {
+     "beta": 207.62704664807518,
+     "feasible": false,
+     "violation": 27506.312547274218,
+     "success": false,
+     "nit": 2
+    },
+    {
+     "beta": 202.54413764836505,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 63
+    }
+   ],
+   "taylor_seconds": 2.122866208999767,
+   "taylor_best": 202.544137648364,
+   "taylor_n_feasible": 2,
+   "taylor_from_convex": {
+    "beta": 202.54413764836514,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 5.575252215450632e-07,
+   "exact_starts": [
+    {
+     "beta": 202.49799887280335,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 77
+    },
+    {
+     "beta": 202.49799887279934,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 74
+    },
+    {
+     "beta": 113.82583129163712,
+     "feasible": false,
+     "violation": 12662.587871692915,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 202.49799887279997,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 63
+    },
+    {
+     "beta": 202.49799887280128,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 84
+    }
+   ],
+   "exact_seconds": 2.825022958997579,
+   "exact_best": 202.49799887279934,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 202.49799887280153,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1618.0890506809044,
+    -210.44113304215207,
+    1465.4165040924852
+   ],
+   "v0": [
+    -12.315721384760302,
+    -25.32364153942747,
+    54.47676229110981
+   ],
+   "tf": 53.80386852146258,
+   "beta_convex": 302.71471776461067,
+   "convex_slack_max_gap": -2.6645352591003757e-15,
+   "taylor_convex_point_violation": 1.3342715892150636e-06,
+   "taylor_starts": [
+    {
+     "beta": 302.7147475834243,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 529
+    },
+    {
+     "beta": 302.71474758342504,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 73
+    },
+    {
+     "beta": 302.7147475834247,
+     "feasible": true,
+     "violation": 3.552713678800501e-14,
+     "success": true,
+     "nit": 68
+    },
+    {
+     "beta": 153.0326236722944,
+     "feasible": false,
+     "violation": 31317.911348756366,
+     "success": false,
+     "nit": 30
+    },
+    {
+     "beta": 302.71474758342663,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 126
+    }
+   ],
+   "taylor_seconds": 1.6077458750005462,
+   "taylor_best": 302.7147475834243,
+   "taylor_n_feasible": 4,
+   "taylor_from_convex": {
+    "beta": 302.71474758342185,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.3342715918795989e-06,
+   "exact_starts": [
+    {
+     "beta": 302.6744906610961,
+     "feasible": true,
+     "violation": 2.1316282072803006e-14,
+     "success": true,
+     "nit": 87
+    },
+    {
+     "beta": 150.18776651746842,
+     "feasible": false,
+     "violation": 23821.826824139516,
+     "success": false,
+     "nit": 39
+    },
+    {
+     "beta": 302.6744906610956,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 302.674490661095,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 67
+    },
+    {
+     "beta": 302.6744906610924,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 145
+    }
+   ],
+   "exact_seconds": 0.7462274159988738,
+   "exact_best": 302.6744906610924,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 302.6744906610927,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1690.9881406939883,
+    -339.3207005965899,
+    -1728.7133414910388
+   ],
+   "v0": [
+    -52.696611960492056,
+    -32.8233050115345,
+    -44.884223137637335
+   ],
+   "tf": 54.29118876357368,
+   "beta_convex": 335.25081886658546,
+   "convex_slack_max_gap": -1.7763568394002505e-14,
+   "taylor_convex_point_violation": 4.603198686226051e-06,
+   "taylor_starts": [
+    {
+     "beta": 146.99861660885747,
+     "feasible": false,
+     "violation": 54937.34486224314,
+     "success": false,
+     "nit": 14
+    },
+    {
+     "beta": 335.24515891881504,
+     "feasible": false,
+     "violation": 1.860298471023748,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 335.2509264883306,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 341
+    },
+    {
+     "beta": 335.25092648832407,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 285
+    },
+    {
+     "beta": 335.2509264883195,
+     "feasible": true,
+     "violation": 6.431098710768743e-13,
+     "success": true,
+     "nit": 290
+    }
+   ],
+   "taylor_seconds": 3.587141709002026,
+   "taylor_best": 335.2509264883195,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 335.25092648832174,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 4.603198688890586e-06,
+   "exact_starts": [
+    {
+     "beta": 335.2401914635816,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 776
+    },
+    {
+     "beta": 159.78818984064748,
+     "feasible": false,
+     "violation": 66373.07336933057,
+     "success": false,
+     "nit": 137
+    },
+    {
+     "beta": 335.2401914635864,
+     "feasible": true,
+     "violation": 8.198074455012805e-13,
+     "success": true,
+     "nit": 632
+    },
+    {
+     "beta": 335.24019146358114,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 348
+    },
+    {
+     "beta": 335.24019146358586,
+     "feasible": true,
+     "violation": 5.084229945850415e-13,
+     "success": true,
+     "nit": 167
+    }
+   ],
+   "exact_seconds": 3.783593459003896,
+   "exact_best": 335.24019146358114,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 335.240191463588,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    2241.063868179824,
+    -774.3764506367596,
+    93.17078348855756
+   ],
+   "v0": [
+    -52.46516114586767,
+    -33.336990520386315,
+    -12.114290470247324
+   ],
+   "tf": 43.81286239319371,
+   "beta_convex": 258.50589418366326,
+   "convex_slack_max_gap": -2.6645352591003757e-15,
+   "taylor_convex_point_violation": 1.5285257299879618e-06,
+   "taylor_starts": [
+    {
+     "beta": 258.5059229009637,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 75
+    },
+    {
+     "beta": 117.78304717070507,
+     "feasible": false,
+     "violation": 40289.952142028815,
+     "success": false,
+     "nit": 603
+    },
+    {
+     "beta": 258.50592290095875,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 83
+    },
+    {
+     "beta": 258.50592290095784,
+     "feasible": true,
+     "violation": 5.684341886080802e-14,
+     "success": true,
+     "nit": 87
+    },
+    {
+     "beta": 117.77873937002775,
+     "feasible": false,
+     "violation": 42809.42512673048,
+     "success": false,
+     "nit": 77
+    }
+   ],
+   "taylor_seconds": 2.124810624998645,
+   "taylor_best": 258.50592290095784,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 258.5059229009753,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 9.88959592440608e-07,
+   "exact_starts": [
+    {
+     "beta": 258.4691432014695,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 74
+    },
+    {
+     "beta": 258.4691432014673,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 91
+    },
+    {
+     "beta": 258.46914320146635,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 66
+    },
+    {
+     "beta": 258.4691432014652,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 79
+    },
+    {
+     "beta": 258.4691432014618,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 68
+    }
+   ],
+   "exact_seconds": 0.6740940419986146,
+   "exact_best": 258.4691432014618,
+   "exact_n_feasible": 5,
+   "exact_from_convex": {
+    "beta": 258.4691432014695,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1948.8228271847058,
+    942.3859916213488,
+    -298.9389821481525
+   ],
+   "v0": [
+    5.973422029090094,
+    -24.018496132312286,
+    -48.67050366828447
+   ],
+   "tf": 49.586003315774974,
+   "beta_convex": 243.72763406942508,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 6.532609591047844e-07,
+   "taylor_starts": [
+    {
+     "beta": 243.72764546222237,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 148.40926199314092,
+     "feasible": false,
+     "violation": 1146.378485881812,
+     "success": false,
+     "nit": 321
+    },
+    {
+     "beta": 243.7276454622252,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 73
+    },
+    {
+     "beta": 133.4999257170112,
+     "feasible": false,
+     "violation": 31386.43446707892,
+     "success": false,
+     "nit": 76
+    },
+    {
+     "beta": 243.727645462225,
+     "feasible": true,
+     "violation": 3.730349362740526e-14,
+     "success": true,
+     "nit": 665
+    }
+   ],
+   "taylor_seconds": 2.3844362079980783,
+   "taylor_best": 243.72764546222237,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 243.72764546222385,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 5.765035595572954e-07,
+   "exact_starts": [
+    {
+     "beta": 243.61093886670886,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 243.61093886670648,
+     "feasible": true,
+     "violation": 2.842170943040401e-14,
+     "success": true,
+     "nit": 138
+    },
+    {
+     "beta": 243.61093886670935,
+     "feasible": true,
+     "violation": 8.526512829121202e-14,
+     "success": true,
+     "nit": 68
+    },
+    {
+     "beta": 243.61093886670886,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 84
+    },
+    {
+     "beta": 243.61093886670864,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 106
+    }
+   ],
+   "exact_seconds": 0.8321169579940033,
+   "exact_best": 243.61093886670648,
+   "exact_n_feasible": 5,
+   "exact_from_convex": {
+    "beta": 243.6109388667082,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1652.9781635004895,
+    -831.5802284502549,
+    590.7497430850619
+   ],
+   "v0": [
+    -56.17421952991195,
+    -26.156139718600162,
+    49.20134108467893
+   ],
+   "tf": 45.80833071298542,
+   "beta_convex": 294.0605023467289,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 4.5054925212895114e-07,
+   "taylor_starts": [
+    {
+     "beta": 294.06051314797617,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 84
+    },
+    {
+     "beta": 294.0605131479785,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 70
+    },
+    {
+     "beta": 294.0605131479717,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 98
+    },
+    {
+     "beta": 294.0605131479784,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 80
+    },
+    {
+     "beta": 294.0605131479789,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 95
+    }
+   ],
+   "taylor_seconds": 0.7805924580025021,
+   "taylor_best": 294.0605131479717,
+   "taylor_n_feasible": 5,
+   "taylor_from_convex": {
+    "beta": 294.06051314797514,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 4.505492547934864e-07,
+   "exact_starts": [
+    {
+     "beta": 294.0547355570477,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 100
+    },
+    {
+     "beta": 294.0547355570459,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 167
+    },
+    {
+     "beta": 123.31389994717686,
+     "feasible": false,
+     "violation": 50530.106979591445,
+     "success": false,
+     "nit": 79
+    },
+    {
+     "beta": 294.0547355570556,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 84
+    },
+    {
+     "beta": 123.31698950807407,
+     "feasible": false,
+     "violation": 44482.42012631025,
+     "success": false,
+     "nit": 135
+    }
+   ],
+   "exact_seconds": 1.1549148750054883,
+   "exact_best": 294.0547355570459,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 294.054735557049,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1582.7534335916837,
+    310.1357246298302,
+    2147.109799553244
+   ],
+   "v0": [
+    -58.410375952142886,
+    37.56013169759135,
+    50.2090432214314
+   ],
+   "tf": 61.467696699544945,
+   "beta_convex": 373.3444977803742,
+   "convex_slack_max_gap": -4.440892098500626e-16,
+   "taylor_convex_point_violation": 1.877157736807078e-06,
+   "taylor_starts": [
+    {
+     "beta": 186.86427798142205,
+     "feasible": false,
+     "violation": 61287.68546890029,
+     "success": false,
+     "nit": 4
+    },
+    {
+     "beta": 373.34581368316054,
+     "feasible": true,
+     "violation": 2.4619648986146103e-07,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 178.29685312450826,
+     "feasible": false,
+     "violation": 69333.71565079119,
+     "success": false,
+     "nit": 7
+    },
+    {
+     "beta": 373.34455312361905,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 482
+    },
+    {
+     "beta": 167.22565739833308,
+     "feasible": false,
+     "violation": 130067.46837385085,
+     "success": false,
+     "nit": 140
+    }
+   ],
+   "taylor_seconds": 3.2589473339976394,
+   "taylor_best": 373.34455312361905,
+   "taylor_n_feasible": 2,
+   "taylor_from_convex": {
+    "beta": 373.3445531236222,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.8771577394716132e-06,
+   "exact_starts": [
+    {
+     "beta": 373.33071251464736,
+     "feasible": true,
+     "violation": 8.657480066176504e-09,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 173.21507879289499,
+     "feasible": false,
+     "violation": 74148.41404423755,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 373.3306725936293,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 405
+    },
+    {
+     "beta": 373.33067259362423,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 776
+    },
+    {
+     "beta": 373.3518670495385,
+     "feasible": false,
+     "violation": 0.0007158480851022002,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "exact_seconds": 8.186251832994458,
+   "exact_best": 373.33067259362423,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 373.33067259411075,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    2160.7676407434783,
+    -295.96538972957643,
+    1034.1214554769977
+   ],
+   "v0": [
+    -62.76430469739753,
+    4.238929722494156,
+    -63.23418112210828
+   ],
+   "tf": 38.44781738914815,
+   "beta_convex": 221.88660172518536,
+   "convex_slack_max_gap": 1.7201609132655449e-06,
+   "taylor_convex_point_violation": 1.629831221716671e-05,
+   "taylor_starts": [
+    {
+     "beta": 108.23276299602674,
+     "feasible": false,
+     "violation": 41257.579750868324,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 221.8878984710231,
+     "feasible": true,
+     "violation": 2.842170943040401e-14,
+     "success": true,
+     "nit": 74
+    },
+    {
+     "beta": 221.8878984709815,
+     "feasible": true,
+     "violation": 9.094947017729282e-13,
+     "success": true,
+     "nit": 71
+    },
+    {
+     "beta": 221.88789847098923,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 70
+    },
+    {
+     "beta": 221.88789847099224,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 72
+    }
+   ],
+   "taylor_seconds": 2.8256518339985632,
+   "taylor_best": 221.8878984709815,
+   "taylor_n_feasible": 4,
+   "taylor_from_convex": {
+    "beta": 221.88789847097829,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 2.330952286300203e-06,
+   "exact_starts": [
+    {
+     "beta": 221.84825378125421,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 87
+    },
+    {
+     "beta": 221.84825378124478,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 62
+    },
+    {
+     "beta": 221.84825378126038,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 78
+    },
+    {
+     "beta": 221.8482537812402,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 76
+    },
+    {
+     "beta": 111.57405752268411,
+     "feasible": false,
+     "violation": 22065.677752895543,
+     "success": false,
+     "nit": 196
+    }
+   ],
+   "exact_seconds": 1.0218137920019217,
+   "exact_best": 221.8482537812402,
+   "exact_n_feasible": 4,
+   "exact_from_convex": {
+    "beta": 221.84825378124452,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    931.1084691344047,
+    209.21544678376702,
+    882.4027675581827
+   ],
+   "v0": [
+    -38.08859857751826,
+    20.310302251489077,
+    -69.3928110002638
+   ],
+   "tf": 27.760385960391943,
+   "beta_convex": 177.82057526244262,
+   "convex_slack_max_gap": 4.618527782440651e-14,
+   "taylor_convex_point_violation": 5.156521547533544e-07,
+   "taylor_starts": [
+    {
+     "beta": 73.75925731633932,
+     "feasible": false,
+     "violation": 14120.764443597054,
+     "success": false,
+     "nit": 167
+    },
+    {
+     "beta": 89.89073327129816,
+     "feasible": false,
+     "violation": 6366.161305342485,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 80.50557384132773,
+     "feasible": false,
+     "violation": 13652.603005581912,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 177.82058222948223,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 96
+    },
+    {
+     "beta": 177.82058222948027,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 88
+    }
+   ],
+   "taylor_seconds": 5.09594045799895,
+   "taylor_best": 177.82058222948027,
+   "taylor_n_feasible": 2,
+   "taylor_from_convex": {
+    "beta": 177.82058222948126,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.9057843214653758e-07,
+   "exact_starts": [
+    {
+     "beta": 83.94209295626217,
+     "feasible": false,
+     "violation": 8963.843109927559,
+     "success": false,
+     "nit": 957
+    },
+    {
+     "beta": 73.80710748445982,
+     "feasible": false,
+     "violation": 14477.679328164475,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 79.20196977364782,
+     "feasible": false,
+     "violation": 13513.005301777188,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 177.81718924588955,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 98
+    },
+    {
+     "beta": 177.81718924588785,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 72
+    }
+   ],
+   "exact_seconds": 7.088918333000038,
+   "exact_best": 177.81718924588785,
+   "exact_n_feasible": 2,
+   "exact_from_convex": {
+    "beta": 177.81718924589003,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1971.2971168543502,
+    433.55364562656564,
+    -140.0729087766759
+   ],
+   "v0": [
+    -8.191574740687733,
+    21.53865064907197,
+    57.79375005234222
+   ],
+   "tf": 46.92015275367129,
+   "beta_convex": 246.14848031248854,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 2.2645349329053488e-07,
+   "taylor_starts": [
+    {
+     "beta": 139.9205346512534,
+     "feasible": false,
+     "violation": 25506.736950507748,
+     "success": false,
+     "nit": 10
+    },
+    {
+     "beta": 246.14848400526623,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 66
+    },
+    {
+     "beta": 136.4890929396061,
+     "feasible": false,
+     "violation": 19901.626536965185,
+     "success": false,
+     "nit": 629
+    },
+    {
+     "beta": 246.1484840052689,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 99
+    },
+    {
+     "beta": 246.14848400526427,
+     "feasible": true,
+     "violation": 2.842170943040401e-14,
+     "success": true,
+     "nit": 162
+    }
+   ],
+   "taylor_seconds": 2.103172875002201,
+   "taylor_best": 246.14848400526427,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 246.14848400526637,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.4514306112545228e-07,
+   "exact_starts": [
+    {
+     "beta": 246.0545029757295,
+     "feasible": true,
+     "violation": 6.821210263296962e-13,
+     "success": true,
+     "nit": 147
+    },
+    {
+     "beta": 246.05450297573256,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 74
+    },
+    {
+     "beta": 246.05450297573248,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 93
+    },
+    {
+     "beta": 246.05450297573265,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 68
+    },
+    {
+     "beta": 246.05450297573068,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 113
+    }
+   ],
+   "exact_seconds": 0.9050136669975473,
+   "exact_best": 246.0545029757295,
+   "exact_n_feasible": 5,
+   "exact_from_convex": {
+    "beta": 246.05450297573114,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    766.8659336715848,
+    119.36281446549768,
+    2636.015507771589
+   ],
+   "v0": [
+    -51.026151037744505,
+    -39.49026554301226,
+    -14.978287289473325
+   ],
+   "tf": 50.93418636886273,
+   "beta_convex": 299.7684155783576,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 2.4703998109387726e-06,
+   "taylor_starts": [
+    {
+     "beta": 299.76846863260795,
+     "feasible": true,
+     "violation": 5.46468541529066e-08,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 299.76846830993287,
+     "feasible": true,
+     "violation": 3.1370461783808423e-10,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 299.7684683079316,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 501
+    },
+    {
+     "beta": 299.7044740658025,
+     "feasible": false,
+     "violation": 8.90356997729441,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 299.71111725981996,
+     "feasible": false,
+     "violation": 7.187854308381803,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "taylor_seconds": 8.63303391700174,
+   "taylor_best": 299.7684683079316,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 299.7684683078754,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 2.470399813603308e-06,
+   "exact_starts": [
+    {
+     "beta": 137.4708397676741,
+     "feasible": false,
+     "violation": 52885.25846667035,
+     "success": false,
+     "nit": 32
+    },
+    {
+     "beta": 137.61295223865366,
+     "feasible": false,
+     "violation": 86044.57045769737,
+     "success": false,
+     "nit": 33
+    },
+    {
+     "beta": 137.5501546129045,
+     "feasible": false,
+     "violation": 75026.79086271599,
+     "success": false,
+     "nit": 101
+    },
+    {
+     "beta": 300.68251007102685,
+     "feasible": false,
+     "violation": 0.03219740159488634,
+     "success": false,
+     "nit": 582
+    },
+    {
+     "beta": 137.4879463934386,
+     "feasible": false,
+     "violation": 80505.79269972417,
+     "success": false,
+     "nit": 48
+    }
+   ],
+   "exact_seconds": 1.6408797920012148,
+   "exact_best": null,
+   "exact_n_feasible": 0,
+   "exact_from_convex": {
+    "beta": 299.75829558842617,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1439.9062289401659,
+    819.4903953473769,
+    1107.2591127679666
+   ],
+   "v0": [
+    -23.344236204323497,
+    -5.6409969487486755,
+    -93.67208727315375
+   ],
+   "tf": 37.086553160350334,
+   "beta_convex": 223.27356250673688,
+   "convex_slack_max_gap": -5.329070518200751e-15,
+   "taylor_convex_point_violation": 2.973543429263259e-07,
+   "taylor_starts": [
+    {
+     "beta": 328.740939475226,
+     "feasible": false,
+     "violation": 19821.72432533262,
+     "success": false,
+     "nit": 408
+    },
+    {
+     "beta": 223.2735678353213,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 80
+    },
+    {
+     "beta": 99.24314155024817,
+     "feasible": false,
+     "violation": 21083.94086135017,
+     "success": false,
+     "nit": 176
+    },
+    {
+     "beta": 223.2735678353242,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 78
+    },
+    {
+     "beta": 223.2735678353231,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 71
+    }
+   ],
+   "taylor_seconds": 1.8258945000052336,
+   "taylor_best": 223.2735678353213,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 223.27356783532494,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 2.1332201605162027e-07,
+   "exact_starts": [
+    {
+     "beta": 223.2562063786833,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 73
+    },
+    {
+     "beta": 223.25620637868036,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 72
+    },
+    {
+     "beta": 99.2251464570772,
+     "feasible": false,
+     "violation": 22744.89995195285,
+     "success": false,
+     "nit": 229
+    },
+    {
+     "beta": 101.78880484896646,
+     "feasible": false,
+     "violation": 21152.3409517025,
+     "success": false,
+     "nit": 4
+    },
+    {
+     "beta": 223.25620637868028,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 70
+    }
+   ],
+   "exact_seconds": 0.9530594579991885,
+   "exact_best": 223.25620637868028,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 223.2562063786788,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1897.0113920014137,
+    559.4832473397296,
+    -711.8546959467241
+   ],
+   "v0": [
+    8.243250070032662,
+    16.66435832855747,
+    -64.77118950301637
+   ],
+   "tf": 54.323300935714954,
+   "beta_convex": 285.807904331836,
+   "convex_slack_max_gap": -4.440892098500626e-15,
+   "taylor_convex_point_violation": 6.159950656225988e-07,
+   "taylor_starts": [
+    {
+     "beta": 285.8079150081033,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 69
+    },
+    {
+     "beta": 285.8079150081126,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 83
+    },
+    {
+     "beta": 285.8079150081039,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 66
+    },
+    {
+     "beta": 151.19975873733736,
+     "feasible": false,
+     "violation": 59785.593040270825,
+     "success": false,
+     "nit": 34
+    },
+    {
+     "beta": 147.12087695882246,
+     "feasible": false,
+     "violation": 25917.016755209475,
+     "success": false,
+     "nit": 19
+    }
+   ],
+   "taylor_seconds": 0.5265027079949505,
+   "taylor_best": 285.8079150081033,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 285.80791500810506,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 4.5059387421275687e-07,
+   "exact_starts": [
+    {
+     "beta": 146.97410160536302,
+     "feasible": false,
+     "violation": 29866.528256492187,
+     "success": false,
+     "nit": 76
+    },
+    {
+     "beta": 285.7289370197645,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 66
+    },
+    {
+     "beta": 285.7289370197698,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 59
+    },
+    {
+     "beta": 150.85962190117777,
+     "feasible": false,
+     "violation": 58905.63504078525,
+     "success": false,
+     "nit": 974
+    },
+    {
+     "beta": 150.99277100796152,
+     "feasible": false,
+     "violation": 29826.648338057454,
+     "success": false,
+     "nit": 139
+    }
+   ],
+   "exact_seconds": 2.9962497919987072,
+   "exact_best": 285.7289370197645,
+   "exact_n_feasible": 2,
+   "exact_from_convex": {
+    "beta": 285.7289370197657,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    827.9045424473172,
+    901.238469172704,
+    1775.7259888894102
+   ],
+   "v0": [
+    -0.7853833013169198,
+    -11.015523801761438,
+    -46.858466850610455
+   ],
+   "tf": 41.079651719961575,
+   "beta_convex": 186.4158976368175,
+   "convex_slack_max_gap": -3.552713678800501e-15,
+   "taylor_convex_point_violation": 4.378629636647702e-08,
+   "taylor_starts": [
+    {
+     "beta": 110.23353673964868,
+     "feasible": false,
+     "violation": 29587.23447051095,
+     "success": false,
+     "nit": 70
+    },
+    {
+     "beta": 186.41589824029631,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 627
+    },
+    {
+     "beta": 2153.0644694108746,
+     "feasible": false,
+     "violation": 26367.477274857047,
+     "success": false,
+     "nit": 164
+    },
+    {
+     "beta": 186.4158982402959,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 70
+    },
+    {
+     "beta": 186.4158982402957,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 56
+    }
+   ],
+   "taylor_seconds": 1.9437017500022193,
+   "taylor_best": 186.4158982402957,
+   "taylor_n_feasible": 3,
+   "taylor_from_convex": {
+    "beta": 186.415898240295,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 6.821210263296962e-13,
+   "exact_starts": [
+    {
+     "beta": 186.37415768432544,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 57
+    },
+    {
+     "beta": 112.36078512857028,
+     "feasible": false,
+     "violation": 21495.516216322267,
+     "success": false,
+     "nit": 140
+    },
+    {
+     "beta": 186.37415768432413,
+     "feasible": true,
+     "violation": 2.2737367544323206e-13,
+     "success": true,
+     "nit": 73
+    },
+    {
+     "beta": 186.37415768432547,
+     "feasible": true,
+     "violation": 1.7053025658242404e-13,
+     "success": true,
+     "nit": 61
+    },
+    {
+     "beta": 110.1870697455908,
+     "feasible": false,
+     "violation": 20959.8188470304,
+     "success": false,
+     "nit": 91
+    }
+   ],
+   "exact_seconds": 0.8946600410054089,
+   "exact_best": 186.37415768432413,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 186.37415768432444,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    911.9035918966824,
+    -520.1732876051815,
+    1634.5459016721104
+   ],
+   "v0": [
+    -12.258598749781623,
+    -14.763560399804172,
+    -48.6082998045958
+   ],
+   "tf": 38.737503377117676,
+   "beta_convex": 193.59557174531287,
+   "convex_slack_max_gap": 0.0,
+   "taylor_convex_point_violation": 5.897040242786034e-07,
+   "taylor_starts": [
+    {
+     "beta": 193.59558033458515,
+     "feasible": true,
+     "violation": 2.842170943040401e-14,
+     "success": true,
+     "nit": 65
+    },
+    {
+     "beta": 193.59558033458845,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 60
+    },
+    {
+     "beta": 193.59558033458563,
+     "feasible": true,
+     "violation": 3.410605131648481e-13,
+     "success": true,
+     "nit": 79
+    },
+    {
+     "beta": 106.93246135378763,
+     "feasible": false,
+     "violation": 28187.72228296038,
+     "success": false,
+     "nit": 487
+    },
+    {
+     "beta": 193.5955803345856,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 82
+    }
+   ],
+   "taylor_seconds": 1.7232626659970265,
+   "taylor_best": 193.59558033458515,
+   "taylor_n_feasible": 4,
+   "taylor_from_convex": {
+    "beta": 193.59558033458467,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 1.8189894035458565e-12,
+   "exact_starts": [
+    {
+     "beta": 193.55956053810897,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 77
+    },
+    {
+     "beta": 106.92089239661425,
+     "feasible": false,
+     "violation": 18944.56175742541,
+     "success": false,
+     "nit": 166
+    },
+    {
+     "beta": 103.39476295606036,
+     "feasible": false,
+     "violation": 32426.52842457889,
+     "success": false,
+     "nit": 206
+    },
+    {
+     "beta": 103.70204745247307,
+     "feasible": false,
+     "violation": 28012.987693771294,
+     "success": false,
+     "nit": 214
+    },
+    {
+     "beta": 193.55956053810863,
+     "feasible": true,
+     "violation": 4.547473508864641e-13,
+     "success": true,
+     "nit": 82
+    }
+   ],
+   "exact_seconds": 1.6983939159981674,
+   "exact_best": 193.55956053810863,
+   "exact_n_feasible": 2,
+   "exact_from_convex": {
+    "beta": 193.55956053810968,
+    "feasible": true
+   }
+  },
+  {
+   "r0": [
+    1860.38950360267,
+    -496.3639555519801,
+    -1617.976636962345
+   ],
+   "v0": [
+    -79.5234200427098,
+    -11.583968139855543,
+    -41.950993565425
+   ],
+   "tf": 52.923700729635904,
+   "beta_convex": 344.248020910189,
+   "convex_slack_max_gap": -4.440892098500626e-16,
+   "taylor_convex_point_violation": 5.119866622216307e-06,
+   "taylor_starts": [
+    {
+     "beta": 344.25781622385693,
+     "feasible": false,
+     "violation": 3.911008323953524e-05,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 344.24596325325734,
+     "feasible": false,
+     "violation": 1.534322294997633,
+     "success": false,
+     "nit": 381
+    },
+    {
+     "beta": 143.12984292029049,
+     "feasible": false,
+     "violation": 57641.721781492626,
+     "success": false,
+     "nit": 35
+    },
+    {
+     "beta": 143.16832473284555,
+     "feasible": false,
+     "violation": 94916.28964239296,
+     "success": false,
+     "nit": 59
+    },
+    {
+     "beta": 344.2482331281299,
+     "feasible": true,
+     "violation": 6.509165942225641e-06,
+     "success": false,
+     "nit": 1000
+    }
+   ],
+   "taylor_seconds": 4.840926459000912,
+   "taylor_best": 344.2482331281299,
+   "taylor_n_feasible": 1,
+   "taylor_from_convex": {
+    "beta": 344.2481720243338,
+    "feasible": true
+   },
+   "exact_convex_point_violation": 5.119866624880842e-06,
+   "exact_starts": [
+    {
+     "beta": 344.244256734008,
+     "feasible": true,
+     "violation": 2.435433725953114e-06,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 344.25035482723894,
+     "feasible": true,
+     "violation": 6.138033711717823e-06,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 344.24419180184793,
+     "feasible": true,
+     "violation": 3.26088441681822e-09,
+     "success": false,
+     "nit": 1000
+    },
+    {
+     "beta": 152.94263379338057,
+     "feasible": false,
+     "violation": 62442.039137416315,
+     "success": false,
+     "nit": 7
+    },
+    {
+     "beta": 194.21257963457336,
+     "feasible": false,
+     "violation": 56277.70930015319,
+     "success": false,
+     "nit": 4
+    }
+   ],
+   "exact_seconds": 5.506617917002586,
+   "exact_best": 344.24419180184793,
+   "exact_n_feasible": 3,
+   "exact_from_convex": {
+    "beta": 344.2440632224914,
+    "feasible": true
+   }
+  }
+ ],
+ "skipped": [
+  {
+   "r0": [
+    757.1404055383992,
+    -1.4442751197700776,
+    608.9901457401447
+   ],
+   "v0": [
+    -87.13109916280554,
+    -28.165913233803526,
+    85.6422045920739
+   ],
+   "class": "insufficient_thrust"
+  },
+  {
+   "r0": [
+    885.1003911489262,
+    -542.0935515894852,
+    665.1662013063095
+   ],
+   "v0": [
+    -75.27135230424756,
+    27.735680945017364,
+    68.4541661040977
+   ],
+   "class": "insufficient_thrust"
+  },
+  {
+   "r0": [
+    710.9821685801072,
+    856.2530916341664,
+    -1338.510425752228
+   ],
+   "v0": [
+    -70.29874395485864,
+    -2.0822976533119597,
+    31.209566721350956
+   ],
+   "class": "insufficient_thrust"
+  }
+ ]
+}

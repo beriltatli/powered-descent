@@ -29,3 +29,33 @@ def mass_tightness(sol: Solution, alpha: float) -> dict:
     burned = alpha * sol.dt * np.sum(np.linalg.norm(sol.U, axis=1) * m)
     return {"fuel_booked": float(booked), "fuel_from_thrust": float(burned),
             "difference_kg": float(booked - burned)}
+
+
+def classify_loose(sol: Solution, tol: float, zero_accel: float = 1e-2, tight_gap: float = 1e-3) -> dict:
+    """Why each loose node is loose.
+
+    reversal  - u turns by more than 90 degrees across the node (angle between u_{k-1} and u_{k+1}). In
+                continuous time Lemma 1 lets R2 = lambda2/m vanish at one instant, where the thrust may
+                flip; ZOH averages the flip over a whole interval, shortening ||u|| below sigma;
+    zero      - ||u_k|| below zero_accel m/s^2 with sigma_k > 0: the Section VI mechanism, where the
+                Hamiltonian maximizer under a pointing cone is u = 0;
+    tolerance - gap below tight_gap m/s^2 and none of the above: interior-point residual, confirmed for
+                the one such case in results/lemma1_battery.json by re-solving at 1e-10 tolerances;
+    other     - none of the above.
+    """
+    gap = slack_gaps(sol)
+    n = np.linalg.norm(sol.U, axis=1)
+    unit = sol.U / np.maximum(n[:, None], 1e-12)
+    out = {}
+    for k in np.flatnonzero(gap > tol):
+        a, b = max(k - 1, 0), min(k + 1, len(n) - 1)
+        if n[k] < zero_accel:
+            r = "zero"
+        elif a != b and unit[a] @ unit[b] < 0:
+            r = "reversal"
+        elif gap[k] < tight_gap:
+            r = "tolerance"
+        else:
+            r = "other"
+        out[int(k)] = r
+    return out
