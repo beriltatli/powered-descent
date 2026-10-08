@@ -67,19 +67,36 @@ timing:
 
 guidance:
   dt_resolve: 1.0               # NOT IN PAPER — re-solve period (s)
-  t_stop: 1.0                   # NOT IN PAPER — stop re-solving when time-to-go is below this (s)
+  # NOT IN PAPER — stop re-solving when time-to-go is below this (s). With 1.0 s the last second is
+  # flown open loop under the mass error; the 1 s variant is in results/ablation.json.
+  t_stop: 0.25
   sim_dt: 0.02                  # plant RK4 step (s)
+  # NOT IN PAPER — plan with the heaviest plausible mass m_hat (1 + delta), delta = 0.05/0.95, so that
+  # eps in [-5 %, +5 %] maps to an effective error in [0, +10.5 %]. Planning lighter than the truth
+  # (eps < 0) crashes: see REPORT.md, closed loop.
+  plan_mass_margin: 0.05263157894736842
+  # NOT IN PAPER — constraint tightening: the nominal re-solve plans with rho2 * 0.97; the first
+  # fallback re-solves at the same tf with the true rho2. Without it, the fixed-time re-solve has zero
+  # slack during the final full-thrust burn, every small deviation forces a re-time to a later tf, and
+  # repeated re-times can run the tank dry (results/ablation.json, no_rho2_tightening). Chosen from
+  # {1.0, 0.97, 0.95} on the mass errors that failed without it; 0.95 also landed but used more fuel.
+  rho2_margin: 0.97
 
 montecarlo:
   runs: 1000                    # brief
   mass_error: 0.05              # epsilon ~ U[-5%, +5%], brief
   seed: 2026
-  r0_dispersion: [100.0, 0.0, 200.0]   # NOT IN PAPER — +-uniform box around scenario.r0 (m)
-  v0_dispersion: [5.0, 5.0, 10.0]      # NOT IN PAPER — +-uniform box around scenario.v0 (m/s)
+  # NOT IN PAPER — Monte Carlo initial state. The Section V state needs 403.6 kg at N = 50 against
+  # 400 kg on board (Algorithm 1: insufficient fuel), so a Monte Carlo on it measures the fuel budget,
+  # not the guidance. Same position and vertical velocity, horizontal velocity halved: 319.6 kg.
+  # The Section V state itself is also flown (paper_ic block in results/montecarlo.json).
+  r0: [1500.0, 0.0, 2000.0]
+  v0: [-75.0, 0.0, 50.0]
 
 envelope:
-  downrange: [-1000.0, 6000.0, 15]     # r0[2] grid (min, max, count), altitude and v0[0] from scenario
-  horizontal_velocity: [-120.0, 120.0, 13]   # v0[2] grid; keeps |v0| < vmax
+  # NOT IN PAPER — grid. Altitude 1500 m and vertical velocity -75 m/s from the Section V state.
+  downrange: [-2000.0, 6000.0, 17]     # r0[2] grid (min, max, count)
+  horizontal_velocity: [-120.0, 120.0, 25]   # v0[2] grid, 10 m/s steps; keeps |v0| < vmax
   mass_error_cases: [-0.05, 0.05]      # worst-case corners for the "with error" map
 
 success:

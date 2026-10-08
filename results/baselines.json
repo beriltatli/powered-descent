@@ -1,0 +1,524 @@
+{
+ "montecarlo": {
+  "r0": [
+   1500.0,
+   0.0,
+   2000.0
+  ],
+  "v0": [
+   -75.0,
+   0.0,
+   50.0
+  ],
+  "tw": 1.6111243908108754,
+  "poly_tgo": 57.86841499239161,
+  "by_eps": {
+   "-0.05": {
+    "eps": -0.05,
+    "closed": {
+     "status": "landed_at_tf",
+     "landing_error": 4.0013882962653985e-05,
+     "touchdown_speed": 0.00011629864743232591,
+     "fuel_used": 321.8578612742597,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.045061347580485744,
+     "n_resolves": 60,
+     "n_feasible": 60,
+     "n_physical": 0,
+     "n_retimed_hard": 0,
+     "n_recovery": 0,
+     "n_retimed": 0,
+     "n_held": 0,
+     "recursively_feasible": true,
+     "strictly_feasible": true,
+     "t_end": 60.625651802437005,
+     "tf_plan0": 60.625651802437005,
+     "fuel_remaining": 78.14213872574032,
+     "max_solve_ms": 20.54599999974016
+    },
+    "open_loop": {
+     "status": "landed_at_tf",
+     "landing_error": 1.0634245359793477,
+     "touchdown_speed": 0.04799780353783824,
+     "fuel_used": 324.83079675155204,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 8.049328077129076
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 1378.227020258254,
+     "touchdown_speed": 70.9891191469191,
+     "fuel_used": 197.7619546293431,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 1379.1864022921684,
+     "time_outside_annulus_frac": 0.334552104158116
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.010076644829169444,
+     "touchdown_speed": 0.149996539600354,
+     "fuel_used": 315.57857367937004,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 565.3262353006193,
+     "time_outside_annulus_frac": 0.19596182134054996,
+     "subsurface_depth_m": 13.911816495949052
+    },
+    "constant_tw": {
+     "status": "ground_contact",
+     "landing_error": 2554.059402141246,
+     "touchdown_speed": 30.03271357209576,
+     "fuel_used": 145.55787322413403,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 2554.059402141246
+    }
+   },
+   "+0.00": {
+    "eps": 0.0,
+    "closed": {
+     "status": "landed_at_tf",
+     "landing_error": 0.021900233674167074,
+     "touchdown_speed": 0.13381173030480675,
+     "fuel_used": 334.68222017651306,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.0,
+     "n_resolves": 67,
+     "n_feasible": 65,
+     "n_physical": 1,
+     "n_retimed_hard": 1,
+     "n_recovery": 0,
+     "n_retimed": 0,
+     "n_held": 0,
+     "recursively_feasible": true,
+     "strictly_feasible": false,
+     "t_end": 67.67500465585931,
+     "tf_plan0": 66.66777045502279,
+     "fuel_remaining": 65.31777982348694,
+     "max_solve_ms": 25.287790995207615
+    },
+    "open_loop": {
+     "status": "landed_at_tf",
+     "landing_error": 687.3923122119653,
+     "touchdown_speed": 17.5805733496413,
+     "fuel_used": 354.56774849108183,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.0
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 1306.2646663434405,
+     "touchdown_speed": 71.69592845936816,
+     "fuel_used": 203.77852188503175,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 1307.9767795040802,
+     "time_outside_annulus_frac": 0.36427470845315507
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.0005567133317166005,
+     "touchdown_speed": 0.006241270196083606,
+     "fuel_used": 313.43821164846963,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 61.98874114712791,
+     "time_outside_annulus_frac": 0.20149160818613862,
+     "subsurface_depth_m": 0.0
+    },
+    "constant_tw": {
+     "status": "stopped_above_ground",
+     "landing_error": 2524.495904638303,
+     "touchdown_speed": 0.04874943017980572,
+     "fuel_used": 203.59573899266138,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 2524.495904638303
+    }
+   },
+   "+0.05": {
+    "eps": 0.05,
+    "closed": {
+     "status": "landed_at_tf",
+     "landing_error": 0.20498247549412568,
+     "touchdown_speed": 0.5632953495226422,
+     "fuel_used": 351.8003188748107,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.0,
+     "n_resolves": 74,
+     "n_feasible": 68,
+     "n_physical": 4,
+     "n_retimed_hard": 2,
+     "n_recovery": 0,
+     "n_retimed": 0,
+     "n_held": 0,
+     "recursively_feasible": true,
+     "strictly_feasible": false,
+     "t_end": 74.8718931682269,
+     "tf_plan0": 74.6934948635019,
+     "fuel_remaining": 48.19968112518927,
+     "max_solve_ms": 24.66945799824316
+    },
+    "open_loop": {
+     "status": "landed_at_tf",
+     "landing_error": 1658.9581587115877,
+     "touchdown_speed": 38.382446663628976,
+     "fuel_used": 395.6364442348183,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.0
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 1225.71299323685,
+     "touchdown_speed": 72.19650633108269,
+     "fuel_used": 210.00274525039868,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 1226.0053550062519,
+     "time_outside_annulus_frac": 0.38812191422475617
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.010377905241478278,
+     "touchdown_speed": 0.16438640651176126,
+     "fuel_used": 311.75098661009406,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 0.0,
+     "time_outside_annulus_frac": 0.20425650160893297,
+     "subsurface_depth_m": 0.0
+    },
+    "constant_tw": {
+     "status": "stopped_above_ground",
+     "landing_error": 2495.924064535122,
+     "touchdown_speed": 0.04753886757514151,
+     "fuel_used": 190.0109975101584,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 2489.7851974589034
+    }
+   }
+  },
+  "closed_no_margin": {
+   "-0.05": {
+    "status": "ground_contact",
+    "landing_error": 1.8627628619198697,
+    "touchdown_speed": 6.792876689273702,
+    "fuel_used": 397.42517588530495,
+    "fuel_exhausted": false,
+    "glideslope_violation_m": 29.346570997373874,
+    "n_resolves": 61,
+    "n_feasible": 41,
+    "n_physical": 5,
+    "n_retimed_hard": 4,
+    "n_recovery": 9,
+    "n_retimed": 0,
+    "n_held": 2,
+    "recursively_feasible": false,
+    "strictly_feasible": false,
+    "t_end": 61.44626031229759,
+    "tf_plan0": 56.101142182472536,
+    "fuel_remaining": 2.5748241146950477,
+    "max_solve_ms": 23.78908400714863
+   },
+   "+0.00": {
+    "status": "landed_at_tf",
+    "landing_error": 4.001973010823323e-05,
+    "touchdown_speed": 0.0001163013348171923,
+    "fuel_used": 321.85786196865115,
+    "fuel_exhausted": false,
+    "glideslope_violation_m": 0.04505971622074867,
+    "n_resolves": 60,
+    "n_feasible": 60,
+    "n_physical": 0,
+    "n_retimed_hard": 0,
+    "n_recovery": 0,
+    "n_retimed": 0,
+    "n_held": 0,
+    "recursively_feasible": true,
+    "strictly_feasible": true,
+    "t_end": 60.625651802437,
+    "tf_plan0": 60.625651802437,
+    "fuel_remaining": 78.14213803134885,
+    "max_solve_ms": 16.45045800250955
+   },
+   "+0.05": {
+    "status": "landed_at_tf",
+    "landing_error": 0.027022607016627165,
+    "touchdown_speed": 0.13128101997817934,
+    "fuel_used": 331.06762497852515,
+    "fuel_exhausted": false,
+    "glideslope_violation_m": 0.0,
+    "n_resolves": 66,
+    "n_feasible": 63,
+    "n_physical": 2,
+    "n_retimed_hard": 1,
+    "n_recovery": 0,
+    "n_retimed": 0,
+    "n_held": 0,
+    "recursively_feasible": true,
+    "strictly_feasible": false,
+    "t_end": 66.5,
+    "tf_plan0": 66.29470594571174,
+    "fuel_remaining": 68.93237502147485,
+    "max_solve_ms": 20.724625006550923
+   }
+  }
+ },
+ "section_v": {
+  "r0": [
+   1500.0,
+   0.0,
+   2000.0
+  ],
+  "v0": [
+   -75.0,
+   0.0,
+   100.0
+  ],
+  "tw": 1.881215844574319,
+  "poly_tgo": 79.22266649563463,
+  "by_eps": {
+   "-0.05": {
+    "eps": -0.05,
+    "closed": {
+     "status": "ground_contact",
+     "landing_error": 2.765860282200907,
+     "touchdown_speed": 11.952649239500936,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 3.8066809119645386,
+     "n_resolves": 82,
+     "n_feasible": 81,
+     "n_physical": 0,
+     "n_retimed_hard": 0,
+     "n_recovery": 0,
+     "n_retimed": 1,
+     "n_held": 0,
+     "recursively_feasible": false,
+     "strictly_feasible": false,
+     "t_end": 82.14211750077894,
+     "tf_plan0": 83.28635315439962,
+     "fuel_remaining": 0.0,
+     "max_solve_ms": 18.89274999848567
+    },
+    "open_loop": {
+     "status": "ground_contact",
+     "landing_error": 4.804561774538269,
+     "touchdown_speed": 12.941006820528571,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 6.068998931932583
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 2881.2431772036116,
+     "touchdown_speed": 42.406284797340135,
+     "fuel_used": 177.2959126628225,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 2882.2740903819213,
+     "time_outside_annulus_frac": 0.2741639604013638
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.008142996906179333,
+     "touchdown_speed": 0.12300653016885582,
+     "fuel_used": 394.37348882489414,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 3439.8571715230833,
+     "time_outside_annulus_frac": 0.17394011852351762,
+     "subsurface_depth_m": 135.38702911674727
+    },
+    "constant_tw": {
+     "status": "ground_contact",
+     "landing_error": 3166.765932381725,
+     "touchdown_speed": 33.032462591640886,
+     "fuel_used": 156.77726024596063,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 3166.765932381725
+    }
+   },
+   "+0.00": {
+    "eps": 0.0,
+    "closed": {
+     "status": "ground_contact",
+     "landing_error": 5.292210352409669,
+     "touchdown_speed": 24.4452375531111,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 8.562519987693847,
+     "n_resolves": 89,
+     "n_feasible": 87,
+     "n_physical": 0,
+     "n_retimed_hard": 1,
+     "n_recovery": 0,
+     "n_retimed": 1,
+     "n_held": 0,
+     "recursively_feasible": false,
+     "strictly_feasible": false,
+     "t_end": 89.26603321331169,
+     "tf_plan0": 91.57059331149303,
+     "fuel_remaining": 0.0,
+     "max_solve_ms": 20.334625005489215
+    },
+    "open_loop": {
+     "status": "landed_at_tf",
+     "landing_error": 1254.2708262551205,
+     "touchdown_speed": 71.35084296514336,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 0.0
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 2878.0706681416,
+     "touchdown_speed": 42.23304198238188,
+     "fuel_used": 178.72558362899372,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 2878.2305239672646,
+     "time_outside_annulus_frac": 0.303448508657863
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.0003535221877546816,
+     "touchdown_speed": 0.004049850245749582,
+     "fuel_used": 391.4468162836779,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 2091.171595480592,
+     "time_outside_annulus_frac": 0.182018614594276,
+     "subsurface_depth_m": 51.14328560358605
+    },
+    "constant_tw": {
+     "status": "stopped_above_ground",
+     "landing_error": 3116.695233695349,
+     "touchdown_speed": 0.04799349362836219,
+     "fuel_used": 210.07359106699937,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 3116.695233695349
+    }
+   },
+   "+0.05": {
+    "eps": 0.05,
+    "closed": {
+     "status": "ground_contact",
+     "landing_error": 21.78932275253023,
+     "touchdown_speed": 56.17733758441061,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 30.27111550837067,
+     "n_resolves": 98,
+     "n_feasible": 94,
+     "n_physical": 0,
+     "n_retimed_hard": 1,
+     "n_recovery": 2,
+     "n_retimed": 1,
+     "n_held": 0,
+     "recursively_feasible": false,
+     "strictly_feasible": false,
+     "t_end": 98.74666804195188,
+     "tf_plan0": 104.2694704105184,
+     "fuel_remaining": 0.0,
+     "max_solve_ms": 20.41737499530427
+    },
+    "open_loop": {
+     "status": "landed_at_tf",
+     "landing_error": 2783.228495838509,
+     "touchdown_speed": 144.14074461252218,
+     "fuel_used": 400.0,
+     "fuel_exhausted": true,
+     "glideslope_violation_m": 0.0
+    },
+    "polynomial": {
+     "status": "ground_contact",
+     "landing_error": 2877.3988774765553,
+     "touchdown_speed": 42.144146650419195,
+     "fuel_used": 179.28539789255046,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 2880.201170855431,
+     "time_outside_annulus_frac": 0.3271790908657157
+    },
+    "polynomial_ideal": {
+     "status": "landed_at_tf",
+     "landing_error": 0.008542195223835826,
+     "touchdown_speed": 0.1384488791038058,
+     "fuel_used": 389.1749261227558,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": 859.9246350196188,
+     "time_outside_annulus_frac": 0.1868152216362888,
+     "subsurface_depth_m": 0.0
+    },
+    "constant_tw": {
+     "status": "stopped_above_ground",
+     "landing_error": 3084.9678239169507,
+     "touchdown_speed": 0.04779386735294539,
+     "fuel_used": 202.757784476614,
+     "fuel_exhausted": false,
+     "glideslope_violation_m": null,
+     "horizontal_miss": 3083.567626641319
+    }
+   }
+  },
+  "closed_no_margin": {
+   "-0.05": {
+    "status": "ground_contact",
+    "landing_error": 27.255580913434166,
+    "touchdown_speed": 27.719354131643524,
+    "fuel_used": 400.0,
+    "fuel_exhausted": true,
+    "glideslope_violation_m": 27.842479246302695,
+    "n_resolves": 73,
+    "n_feasible": 68,
+    "n_physical": 2,
+    "n_retimed_hard": 0,
+    "n_recovery": 0,
+    "n_retimed": 0,
+    "n_held": 3,
+    "recursively_feasible": false,
+    "strictly_feasible": false,
+    "t_end": 73.71037592282401,
+    "tf_plan0": 76.75301852885923,
+    "fuel_remaining": 0.0,
+    "max_solve_ms": 18.506166990846395
+   },
+   "+0.00": {
+    "status": "ground_contact",
+    "landing_error": 2.777417687394488,
+    "touchdown_speed": 11.949228570815063,
+    "fuel_used": 400.0,
+    "fuel_exhausted": true,
+    "glideslope_violation_m": 2.7886766504158755,
+    "n_resolves": 82,
+    "n_feasible": 81,
+    "n_physical": 0,
+    "n_retimed_hard": 0,
+    "n_recovery": 0,
+    "n_retimed": 1,
+    "n_held": 0,
+    "recursively_feasible": false,
+    "strictly_feasible": false,
+    "t_end": 82.13980296757984,
+    "tf_plan0": 83.28635315439962,
+    "fuel_remaining": 0.0,
+    "max_solve_ms": 19.057500001508743
+   },
+   "+0.05": {
+    "status": "ground_contact",
+    "landing_error": 4.273277772412588,
+    "touchdown_speed": 23.20554877860044,
+    "fuel_used": 400.0,
+    "fuel_exhausted": true,
+    "glideslope_violation_m": 8.267828183203378,
+    "n_resolves": 88,
+    "n_feasible": 87,
+    "n_physical": 0,
+    "n_retimed_hard": 0,
+    "n_recovery": 0,
+    "n_retimed": 1,
+    "n_held": 0,
+    "recursively_feasible": false,
+    "strictly_feasible": false,
+    "t_end": 88.82189487135147,
+    "tf_plan0": 90.94325946399327,
+    "fuel_remaining": 0.0,
+    "max_solve_ms": 23.008084011962637
+   }
+  }
+ }
+}

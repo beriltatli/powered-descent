@@ -22,8 +22,10 @@ class FlightResult:
     tf_plan0: float = np.nan
     n_resolves: int = 0
     n_feasible: int = 0         # nominal fixed-tf re-solves that returned optimal
-    n_recovery: int = 0         # nominal infeasible; soft-state recovery problem used at the same tf
-    n_retimed: int = 0          # recovery also infeasible; recovered by re-running the tf search on it
+    n_physical: int = 0         # tightened nominal infeasible; true [rho1, rho2] at the same tf feasible
+    n_retimed_hard: int = 0     # ... infeasible at that tf; hard problem feasible at another tf (re-timed)
+    n_recovery: int = 0         # no hard solution at any searched tf; soft-state recovery at the same tf
+    n_retimed: int = 0          # recovery also infeasible at that tf; soft problem re-timed
     n_held: int = 0             # nothing feasible: kept flying the previous plan
     saturated_time: float = 0.0
     solve_ms: list = field(default_factory=list)
@@ -40,11 +42,19 @@ class FlightResult:
 
     @property
     def recursively_feasible(self) -> bool:
+        # The physical problem (hard constraints, true thrust bounds, free tf) had a solution at every
+        # re-solve.
+        return (self.status != "no_initial_plan"
+                and self.n_feasible + self.n_physical + self.n_retimed_hard == self.n_resolves)
+
+    @property
+    def strictly_feasible(self) -> bool:
+        # The tightened nominal re-solve at the original landing time was feasible every time.
         return self.status != "no_initial_plan" and self.n_feasible == self.n_resolves
 
 
 def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = "closed",
-        R: PDGProblem | None = None,
+        R: PDGProblem | None = None, plan_mass_margin: float = 0.0, rho1_margin: float = 0.0,
         dt_resolve: float = 1.0, t_stop: float = 1.0, sim_dt: float = 0.02, rho2_margin: float = 1.0,
         initial: tuple[float, Solution] | None = None, keep_trace: bool = False) -> FlightResult:
     """Fly the true plant (1)-(2) under the convex guidance.
@@ -60,14 +70,19 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
     nominal solve counts toward recursive feasibility.
     Re-solving stops once time-to-go is below t_stop.
     mode "open": plan once at t = 0 and fly it blind.
-    rho2_margin < 1 plans with rho2 * margin, leaving thrust headroom (an explicit design choice, off by
-    default).
+    rho2_margin < 1 plans with rho2 * margin; rho1_margin > 0 plans with rho1 (1 + rho1_margin). Both
+    tighten only the nominal re-solve; the first fallback uses the true [rho1, rho2], so the reserved
+    headroom is there when the plant drifts off the plan (constraint tightening, as in robust MPC).
+    plan_mass_margin delta: guidance plans and commands with (1 + delta) m-hat, the heaviest mass its
+    estimate allows. eps < 0 (believing the vehicle lighter than it is) otherwise makes every planned
+    acceleration, including the saturated final burn, undershoot by |eps|.
     """
-    mhat = lambda m: (1.0 + eps) * m  # noqa: E731
+    mhat = lambda m: (1.0 + eps) * (1.0 + plan_mass_margin) * m  # noqa: E731
     rho2p = veh.rho2 * rho2_margin
+    rho1p = veh.rho1 * (1.0 + rho1_margin)
     out = FlightResult(mode=mode, eps=eps, status="no_initial_plan")
     if initial is None:
-        res = algorithm1(P, r0, v0, mhat(m0), veh.m_fuel, rho2=rho2p)
+        res = algorithm1(P, r0, v0, mhat(m0), veh.m_fuel, rho1=rho1p, rho2=rho2p)
         if res.sol is None:
             return out
         tf_plan, plan = res.tf, res.sol
@@ -83,25 +98,34 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
         if mode == "closed" and s.t >= next_resolve - 1e-9 and tf_plan - s.t >= t_stop:
             next_resolve += dt_resolve
             out.n_resolves += 1
-            sol = P.solve(s.r, s.v, mhat(s.m), tf_plan - s.t, rho2=rho2p)
+            t_rem, mh = tf_plan - s.t, mhat(s.m)
+            sol = P.solve(s.r, s.v, mh, t_rem, rho1=rho1p, rho2=rho2p)
             out.solve_ms.append(sol.wall_s * 1e3)
+            new_plan, new_tf = None, None
             if sol.ok:
                 out.n_feasible += 1
-                plan, plan_t0 = sol, s.t
-            elif R is not None and (rs := R.solve(s.r, s.v, mhat(s.m), tf_plan - s.t)).ok:
+                new_plan = sol
+            elif (rho1p, rho2p) != (veh.rho1, veh.rho2) and (sp := P.solve(s.r, s.v, mh, t_rem)).ok:
+                out.n_physical += 1
+                new_plan = sp
+            elif (rh := algorithm1(P, s.r, s.v, mh, veh.m_fuel, coarse=8,
+                                   bounds=(max(t_rem * 0.8, 0.5), t_rem + 40.0))).sol is not None:
+                out.n_retimed_hard += 1
+                new_plan, new_tf = rh.sol, s.t + rh.tf
+            elif R is not None and (rs := R.solve(s.r, s.v, mh, t_rem)).ok:
                 out.n_recovery += 1
-                out.solve_ms.append(rs.wall_s * 1e3)
-                plan, plan_t0 = rs, s.t
+                new_plan = rs
             else:
-                t_rem = tf_plan - s.t
-                rt = algorithm1(R or P, s.r, s.v, mhat(s.m), veh.m_fuel, coarse=8,
-                                bounds=(max(t_rem * 0.8, 0.5), t_rem + 40.0),
-                                **({} if R is not None else {"rho2": rho2p}))
+                rt = algorithm1(R or P, s.r, s.v, mh, veh.m_fuel, coarse=8,
+                                bounds=(max(t_rem * 0.8, 0.5), t_rem + 40.0))
                 if rt.sol is not None:
                     out.n_retimed += 1
-                    plan, plan_t0, tf_plan = rt.sol, s.t, s.t + rt.tf
+                    new_plan, new_tf = rt.sol, s.t + rt.tf
                 else:
                     out.n_held += 1
+            if new_plan is not None:
+                plan, plan_t0 = new_plan, s.t
+                tf_plan = new_tf if new_tf is not None else tf_plan
         k = min(int((s.t - plan_t0) / plan.dt + 1e-9), P.N - 1)
         t_next = min(s.t + sim_dt, plan_t0 + (k + 1) * plan.dt, tf_plan)
         if mode == "closed" and next_resolve > s.t + 1e-9:
