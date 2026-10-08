@@ -47,7 +47,8 @@ Each of the following is prohibited and is outside the scope of this license:
 
 (d) Distribution and publication. Publishing, uploading, mirroring, sharing or otherwise making available the
     Software or any modified version of it to any other person, on the internet or by any other means, including
-    public or private repositories, package registries, file-sharing services, websites and social media.
+    public or private repositories, package registries, file-sharing services, websites and social media. This
+    does not restrict contributing under Section 4.
 
 (e) Machine learning. Using the Software as training, fine-tuning or evaluation data for any machine learning or
     artificial intelligence system.
@@ -61,8 +62,15 @@ grant any further right under this license, and every restriction above applies 
 
 4. Contributions
 
-The Licensor does not accept contributions. Pull requests, issues, patches and other submissions may be closed
-or deleted without review. Submitting anything does not give the submitter any right in the Software.
+Anyone may open issues, take part in discussions and submit pull requests to this repository. Forking the
+repository on its hosting platform, and pushing changes to that fork, is permitted for the purpose of preparing
+and submitting a pull request to this repository. The fork must not be used for anything that Section 3
+prohibits.
+
+By submitting a contribution, the contributor confirms they have the right to submit it. The contributor also
+grants the Licensor a perpetual, worldwide, non-exclusive, royalty-free, irrevocable license to use, modify,
+sublicense and distribute the contribution as part of the Software, under this license or any other terms.
+Contributing does not give the contributor any additional right to use the Software beyond Section 2.
 
 5. Other Licenses
 
