@@ -1,0 +1,89 @@
+# Every run reads this file. Citations are to Açıkmeşe & Ploen, JGCD 30(5), 2007
+# (refs/acikmese_ploen_2007.pdf); page numbers are the journal page numbers printed on the PDF.
+# Frame (Fig. 1, p.1355): surface-fixed, origin at the target, axis 1 = altitude (opposite to g),
+# axes 2 and 3 horizontal. Units: m, s, kg, N.
+
+planet:
+  g: [-3.7114, 0.0, 0.0]        # eq. (59), p.1361
+  ge: 9.807                     # text after eq. (2), p.1355 (Earth gravity used in alpha)
+
+vehicle:
+  m_dry: 1505.0                 # eq. (59), p.1361
+  m_wet: 1905.0                 # eq. (59), p.1361  -> m_fuel = 400 kg (derived, not printed)
+  isp: 225.0                    # eq. (59), p.1361
+  thrust_per_engine: 3100.0     # T-bar = 3.1 kN, eq. (59), p.1361
+  throttle_min: 0.3             # T1 = 0.3 T-bar, eq. (59), p.1361
+  throttle_max: 0.8             # T2 = 0.8 T-bar, eq. (59), p.1361
+  n_thrusters: 6                # eq. (59), p.1361
+  cant_deg: 27.0                # phi, eq. (59), p.1361
+
+scenario:                       # Section V example
+  r0: [1500.0, 0.0, 2000.0]     # captions of Figs. 5-8, pp.1362-1363 ([1.5, 0, 2] km)
+  v0: [-75.0, 0.0, 100.0]       # captions of Figs. 5-8, pp.1362-1363
+  glideslope_deg: 86.0          # theta-tilde_alt, Sec. V p.1361 (angle from vertical; Fig. 8 shows 4 deg above horizontal)
+  glideslope: true              # Figs. 7-8 case, p.1361
+  final_thrust_dir: [1.0, 0.0, 0.0]   # n-hat_f, second equality of (37), Sec. V p.1361
+  # NOT IN PAPER — chosen because eq. (10) is defined but no value is given in Sec. V.
+  # 150 m/s sits above the example's initial speed (125 m/s) so the nominal case starts feasible;
+  # the envelope sweep keeps initial speed below it.
+  vmax: 150.0
+
+pointing:                       # Section VI example
+  r0: [5000.0, 0.0, 0.0]        # text p.1364 and Fig. 10 caption
+  # Text p.1364 and Fig. 10 caption give [0,0,0]; Fig. 11 caption gives [20,0,0] m/s, but the
+  # Fig. 11 velocity panel starts at 0, so the caption is treated as a typo.
+  v0: [0.0, 0.0, 0.0]
+  v: [1.0, 0.0, 0.0]            # cone axis, p.1364
+  gamma: 0.0                    # gamma = cos(theta), 90 deg cone, p.1364
+  random_instances: 200         # NOT IN PAPER — sample size for the loose-slack fraction
+  seed: 7
+
+discretization:
+  # NOT IN PAPER — the paper never states Delta-t. This repo fixes the node count N at compile time
+  # and makes Delta-t = tf/N a cvxpy Parameter (see THEORY.md §6). N is chosen from the
+  # convergence study in Phase 5 (results/convergence.json).
+  N: 50
+  N_sweep: [10, 15, 20, 30, 40, 50, 60, 80, 120, 160, 240, 320]
+
+solver:
+  backend: CLARABEL             # NOT IN PAPER (paper used SeDuMi, p.1361)
+  fallback: ECOS                # used only to cross-check a solver_error, never to hide one
+  slack_tol: 1.0e-4             # m/s^2; |sigma - ||u||| above this is "loose" (see verify/slack.py)
+
+tof:
+  coarse_points: 14             # NOT IN PAPER — grid before golden-section refinement
+  golden_tol: 0.05              # s
+  sweep_points: 120             # for the unimodality plot (Remark 10)
+
+nonconvex:
+  instances: 20                 # brief
+  starts: 5                     # brief
+  N: 15                         # "small instances"
+  seed: 11
+
+timing:
+  solves: 600                   # brief asks for >= 500
+  seed: 3
+
+guidance:
+  dt_resolve: 1.0               # NOT IN PAPER — re-solve period (s)
+  t_stop: 1.0                   # NOT IN PAPER — stop re-solving when time-to-go is below this (s)
+  sim_dt: 0.02                  # plant RK4 step (s)
+
+montecarlo:
+  runs: 1000                    # brief
+  mass_error: 0.05              # epsilon ~ U[-5%, +5%], brief
+  seed: 2026
+  r0_dispersion: [100.0, 0.0, 200.0]   # NOT IN PAPER — +-uniform box around scenario.r0 (m)
+  v0_dispersion: [5.0, 5.0, 10.0]      # NOT IN PAPER — +-uniform box around scenario.v0 (m/s)
+
+envelope:
+  downrange: [-1000.0, 6000.0, 15]     # r0[2] grid (min, max, count), altitude and v0[0] from scenario
+  horizontal_velocity: [-120.0, 120.0, 13]   # v0[2] grid; keeps |v0| < vmax
+  mass_error_cases: [-0.05, 0.05]      # worst-case corners for the "with error" map
+
+success:
+  landing_radius: 5.0
+  touchdown_speed: 1.0
+  p99_solve_ms: 50.0
+  recursive_feasibility: 0.99
