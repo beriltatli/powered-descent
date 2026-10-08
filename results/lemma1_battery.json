@@ -24,7 +24,14 @@
     "nodes": [
      0
     ],
-    "max_gap": 0.0002933817466841404
+    "max_gap": 0.0002933817466841404,
+    "resolve_tight_tolerance": {
+     "tf": 38.877716480480686,
+     "max_gap_default_tol": 0.0002933817466841404,
+     "max_gap_tight_tol": 5.576175698962516e-07,
+     "status_tight": "optimal",
+     "tight_after_resolve": true
+    }
    }
   ],
   "exact32_all_nodes_ok": true,

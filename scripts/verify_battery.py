@@ -20,6 +20,18 @@ from montecarlo.sampling import draw_instance
 
 
 
+def characterize_loose(P, veh, draw: dict, tol: float) -> dict:
+    """Re-solve a loose instance at Algorithm 1's tf with Clarabel tolerances tightened from 1e-8 to
+    1e-10: a gap that collapses is an interior-point residual, one that survives is a real violation."""
+    res = algorithm1(P, draw["r0"], draw["v0"], veh.m_wet, veh.m_fuel)
+    P.set_parameters(draw["r0"], draw["v0"], veh.m_wet, res.tf)
+    P.prob.solve(solver="CLARABEL", tol_gap_abs=1e-10, tol_gap_rel=1e-10, tol_feas=1e-10)
+    gap = P.S.value - np.linalg.norm(P.U.value, axis=1)
+    return {"tf": res.tf, "max_gap_default_tol": float(slack_gaps(res.sol).max()),
+            "max_gap_tight_tol": float(gap.max()), "status_tight": P.prob.status,
+            "tight_after_resolve": bool(gap.max() <= tol)}
+
+
 def main(target: int = 500, seed: int = 1):
     cfg = load_config()
     veh = vehicle_from_config(cfg)
@@ -68,6 +80,8 @@ def main(target: int = 500, seed: int = 1):
         "internode_subsurface_max_m": max(r["subsurface_depth_m"] for r in rows),
         "gamma_over_rho2_hist": np.histogram(gam, bins=40, range=(0.3, 1.0))[0].tolist(),
     }
+    for d in summary["loose_detail"]:
+        d["resolve_tight_tolerance"] = characterize_loose(P, veh, draws[d["i"]], tol)
     save("lemma1_battery", {"summary": summary, "instances": rows, "draws": draws})
 
     fig, ax = plt.subplots(1, 2, figsize=(10, 3.6))
