@@ -13,6 +13,10 @@ def test_report_matches_results():
     assert (ROOT / "REPORT.md").read_text() == report.render()
 
 
+def test_readme_matches_results():
+    assert (ROOT / "README.md").read_text() == report.render_readme()
+
+
 def test_template_has_no_literal_numbers_outside_placeholders():
     # Numbers in prose must come from results/, so the template may only carry numbers that are part of
     # the problem statement (equation numbers, the brief's thresholds, paper values). Those are listed

@@ -1,4 +1,4 @@
-"""Render REPORT.md from scripts/report_template.md and results/*.json.
+"""Render REPORT.md and README.md from scripts/*_template.md and results/*.json.
 
 Every number in the report is a {placeholder} filled here from a results file; tests/test_report.py
 re-renders and fails if the committed REPORT.md differs, so the report cannot drift from results/.
@@ -235,9 +235,26 @@ def render() -> str:
     return string.Template(tpl).substitute(values())
 
 
+def readme_values() -> dict:
+    v = values()
+    v["n_tests"] = sum(t.read_text().count("\ndef test_") for t in (ROOT / "tests").glob("test_*.py"))
+    for k in ("constant_tw_success", "polynomial_success", "open_loop_success", "closed_success"):
+        v[f"{k}_num"] = v[k].replace(" %", "")
+    # shields.io static badges: "%" must be URL-encoded.
+    v["badge_success"] = v["closed_success"].replace(" %", "%25")
+    v["badge_rf"] = v["rf_res"].replace(" %", "%25") + "_of_re--solves"
+    return v
+
+
+def render_readme() -> str:
+    tpl = (ROOT / "scripts" / "readme_template.md").read_text()
+    return string.Template(tpl).substitute(readme_values())
+
+
 def main():
     (ROOT / "REPORT.md").write_text(render())
-    print("wrote REPORT.md")
+    (ROOT / "README.md").write_text(render_readme())
+    print("wrote REPORT.md and README.md")
 
 
 if __name__ == "__main__":

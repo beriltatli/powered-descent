@@ -360,7 +360,7 @@ function cameraGoal(dt) {
     if (hv.lengthSq() > 4) camState.back.lerp(hv.normalize().negate(), 1 - Math.exp(-dt * 0.8));
     const d = 16 + Math.min(p.y * 0.01, 10);
     goal.pos.copy(p).addScaledVector(camState.back, d).add(new THREE.Vector3(0, d * 0.16, 0));
-    goal.look.addScaledVector(state.vel, 0.12);
+    goal.look.add(new THREE.Vector3(state.vel.x, 0, state.vel.z).multiplyScalar(0.12));
     goal.fov = 50;
     goal.k = 4.0;
   } else if (mode === 'ground') {
