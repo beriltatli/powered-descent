@@ -7,6 +7,7 @@ streams Server-Sent Events while guidance.mpc.fly runs in real time (paced to th
   step   - every plant step (decimated to the display rate at high speed)
   end    - FlightResult summary
 POST /api/control?id=..&speed=..&paused=0|1 changes pacing of a running flight.
+GET /api/health answers 204; without this server (GitHub Pages) the page replays viz/flights/ instead.
 
 Binds to 127.0.0.1 only. Run: .venv/bin/python viz/server.py [port]
 """
@@ -85,6 +86,18 @@ def hello(run_id: str, label: str, r0, v0, eps: float) -> dict:
                          "rho2_margin": KW["rho2_margin"], "solver": CFG["solver"]["backend"]}}
 
 
+def end_event(res) -> dict:
+    return {"status": res.status, "t_end": res.t_end,
+            "r_end": None if res.r_end is None else res.r_end.tolist(),
+            "v_end": None if res.v_end is None else res.v_end.tolist(),
+            "landing_error": res.landing_error, "touchdown_speed": res.touchdown_speed,
+            "fuel_used": res.fuel_used, "fuel_exhausted": res.fuel_exhausted,
+            "n_resolves": res.n_resolves, "n_feasible": res.n_feasible,
+            "recursively_feasible": res.recursively_feasible,
+            "solve_ms_p50": float(np.median(res.solve_ms)) if res.solve_ms else None,
+            "solve_ms_max": float(np.max(res.solve_ms)) if res.solve_ms else None}
+
+
 class Handler(SimpleHTTPRequestHandler):
     extensions_map = {**SimpleHTTPRequestHandler.extensions_map, ".js": "text/javascript",
                       ".gltf": "model/gltf+json", ".bin": "application/octet-stream", ".json": "application/json"}
@@ -101,6 +114,11 @@ class Handler(SimpleHTTPRequestHandler):
         url = urlparse(self.path)
         if url.path == "/api/fly":
             return self.fly(parse_qs(url.query))
+        if url.path == "/api/health":
+            # The page probes this to choose live flights over recorded ones (viz/record.py).
+            self.send_response(204)
+            self.end_headers()
+            return None
         return super().do_GET()
 
     def do_POST(self):
@@ -161,15 +179,7 @@ class Handler(SimpleHTTPRequestHandler):
                         self.send_event("step", data)
 
                 res = fly(P, VEH, r0, v0, VEH.m_wet, eps, R=R, observer=observer, **KW)
-                self.send_event("end", {"status": res.status, "t_end": res.t_end,
-                                        "r_end": None if res.r_end is None else res.r_end.tolist(),
-                                        "v_end": None if res.v_end is None else res.v_end.tolist(),
-                                        "landing_error": res.landing_error, "touchdown_speed": res.touchdown_speed,
-                                        "fuel_used": res.fuel_used, "fuel_exhausted": res.fuel_exhausted,
-                                        "n_resolves": res.n_resolves, "n_feasible": res.n_feasible,
-                                        "recursively_feasible": res.recursively_feasible,
-                                        "solve_ms_p50": float(np.median(res.solve_ms)) if res.solve_ms else None,
-                                        "solve_ms_max": float(np.max(res.solve_ms)) if res.solve_ms else None})
+                self.send_event("end", end_event(res))
             except (FlightAborted, BrokenPipeError, ConnectionResetError):
                 pass
             finally:
