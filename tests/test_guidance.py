@@ -38,3 +38,15 @@ def test_closed_loop_lands_without_error():
 def test_polynomial_ideal_actuator_hits_target():
     p = fly_polynomial(VEH, [1500.0, 0, 500.0], [-50.0, 0, -10.0], VEH.m_wet, 0.0, 60.0, ideal_actuator=True)
     assert p.landing_error < 0.05 and p.touchdown_speed < 0.05
+
+
+def test_observer_only_reads():
+    # The live 3-D view hooks into fly(); a flight with an observer must equal one without.
+    P, R = guidance_problems(CFG)
+    kw = guidance_kwargs(CFG)
+    args = (P, VEH, CFG["montecarlo"]["r0"], CFG["montecarlo"]["v0"], VEH.m_wet, 0.03)
+    events = []
+    a = fly(*args, R=R, **kw)
+    b = fly(*args, R=R, observer=lambda kind, data: events.append(kind), **kw)
+    assert np.array_equal(a.r_end, b.r_end) and a.fuel_used == b.fuel_used and a.n_resolves == b.n_resolves
+    assert events.count("plan") == b.n_resolves + 1 and events.count("step") > 0

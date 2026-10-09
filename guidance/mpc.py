@@ -1,3 +1,5 @@
+import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -56,7 +58,8 @@ class FlightResult:
 def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = "closed",
         R: PDGProblem | None = None, plan_mass_margin: float = 0.0, rho1_margin: float = 0.0,
         dt_resolve: float = 1.0, t_stop: float = 1.0, sim_dt: float = 0.02, rho2_margin: float = 1.0,
-        initial: tuple[float, Solution] | None = None, keep_trace: bool = False) -> FlightResult:
+        initial: tuple[float, Solution] | None = None, keep_trace: bool = False,
+        observer: Callable[[str, dict], None] | None = None) -> FlightResult:
     """Fly the true plant (1)-(2) under the convex guidance.
 
     Mass error: guidance believes m-hat = (1 + eps) m at all times (the brief's model: a persistent
@@ -76,11 +79,14 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
     plan_mass_margin delta: guidance plans and commands with (1 + delta) m-hat, the heaviest mass its
     estimate allows. eps < 0 (believing the vehicle lighter than it is) otherwise makes every planned
     acceleration, including the saturated final burn, undershoot by |eps|.
+    observer, if given, receives ("plan", ...) after every planning step and ("step", ...) after every plant
+    step; it only reads, so a flight with an observer is identical to one without.
     """
     mhat = lambda m: (1.0 + eps) * (1.0 + plan_mass_margin) * m  # noqa: E731
     rho2p = veh.rho2 * rho2_margin
     rho1p = veh.rho1 * (1.0 + rho1_margin)
     out = FlightResult(mode=mode, eps=eps, status="no_initial_plan")
+    w0 = time.perf_counter()
     if initial is None:
         res = algorithm1(P, r0, v0, mhat(m0), veh.m_fuel, rho1=rho1p, rho2=rho2p)
         if res.sol is None:
@@ -90,6 +96,8 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
         tf_plan, plan = initial
     out.tf_plan0 = tf_plan
     plan_t0 = 0.0
+    if observer is not None:
+        observer("plan", _plan_event("initial", 0.0, tf_plan, plan, (time.perf_counter() - w0) * 1e3))
     s = PlantState(0.0, np.asarray(r0, float), np.asarray(v0, float), m0)
     next_resolve = dt_resolve
     tan_gs = np.tan(np.deg2rad(P.opts.glideslope_deg)) if P.opts.glideslope_deg is not None else None
@@ -98,34 +106,38 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
         if mode == "closed" and s.t >= next_resolve - 1e-9 and tf_plan - s.t >= t_stop:
             next_resolve += dt_resolve
             out.n_resolves += 1
+            w0 = time.perf_counter()
             t_rem, mh = tf_plan - s.t, mhat(s.m)
             sol = P.solve(s.r, s.v, mh, t_rem, rho1=rho1p, rho2=rho2p)
             out.solve_ms.append(sol.wall_s * 1e3)
             new_plan, new_tf = None, None
             if sol.ok:
                 out.n_feasible += 1
-                new_plan = sol
+                new_plan, kind = sol, "nominal"
             elif (rho1p, rho2p) != (veh.rho1, veh.rho2) and (sp := P.solve(s.r, s.v, mh, t_rem)).ok:
                 out.n_physical += 1
-                new_plan = sp
+                new_plan, kind = sp, "true_bounds"
             elif (rh := algorithm1(P, s.r, s.v, mh, veh.m_fuel, coarse=8,
                                    bounds=(max(t_rem * 0.8, 0.5), t_rem + 40.0))).sol is not None:
                 out.n_retimed_hard += 1
-                new_plan, new_tf = rh.sol, s.t + rh.tf
+                new_plan, new_tf, kind = rh.sol, s.t + rh.tf, "retimed"
             elif R is not None and (rs := R.solve(s.r, s.v, mh, t_rem)).ok:
                 out.n_recovery += 1
-                new_plan = rs
+                new_plan, kind = rs, "soft_recovery"
             else:
                 rt = algorithm1(R or P, s.r, s.v, mh, veh.m_fuel, coarse=8,
                                 bounds=(max(t_rem * 0.8, 0.5), t_rem + 40.0))
                 if rt.sol is not None:
                     out.n_retimed += 1
-                    new_plan, new_tf = rt.sol, s.t + rt.tf
+                    new_plan, new_tf, kind = rt.sol, s.t + rt.tf, "soft_retimed"
                 else:
                     out.n_held += 1
+                    kind = "held"
             if new_plan is not None:
                 plan, plan_t0 = new_plan, s.t
                 tf_plan = new_tf if new_tf is not None else tf_plan
+            if observer is not None:
+                observer("plan", _plan_event(kind, plan_t0, tf_plan, plan, (time.perf_counter() - w0) * 1e3))
         k = min(int((s.t - plan_t0) / plan.dt + 1e-9), P.N - 1)
         t_next = min(s.t + sim_dt, plan_t0 + (k + 1) * plan.dt, tf_plan)
         if mode == "closed" and next_resolve > s.t + 1e-9:
@@ -137,6 +149,9 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
         new = step_rk4(s, T, dt, veh)
         if keep_trace:
             out.trace.append((s.t, *s.r, *s.v, s.m, *T))
+        if observer is not None:
+            observer("step", {"t": new.t, "r": new.r.tolist(), "v": new.v.tolist(), "m": new.m,
+                               "T": np.asarray(T).tolist(), "saturated": bool(sat)})
         if tan_gs is not None and new.t < tf_plan - 1.0:
             out.glideslope_violation_m = max(out.glideslope_violation_m,
                                              np.linalg.norm(new.r[1:3]) - tan_gs * new.r[0])
@@ -157,3 +172,9 @@ def fly(P: PDGProblem, veh: Vehicle, r0, v0, m0: float, eps: float, mode: str = 
     out.fuel_exhausted = out.m_end <= veh.m_dry + 1e-6
     out.glideslope_violation_m = float(max(0.0, out.glideslope_violation_m))
     return out
+
+
+def _plan_event(kind: str, t0: float, tf: float, plan: Solution, solve_ms: float) -> dict:
+    # Plan positions are absolute in the surface frame; node k is at t0 + k dt.
+    return {"kind": kind, "t0": t0, "tf": tf, "dt": plan.dt, "solve_ms": solve_ms,
+            "r": plan.Y[:, 0:3].tolist(), "status": plan.status}

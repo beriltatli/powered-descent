@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Powered Descent Live</title>
+<link rel="stylesheet" href="css/hud.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js", "three/addons/": "./vendor/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<div id="loading"><div class="spinner"></div><div id="loading-text">Loading Mars…</div></div>
+
+<header id="topbar">
+  <div class="brand">POWERED DESCENT <span>convex guidance · live</span></div>
+  <div id="phase" class="pill">IDLE</div>
+  <div id="clock">T+ <b id="t">0.0</b> s · T-go <b id="tgo">—</b> s</div>
+</header>
+
+<aside id="telemetry" class="panel">
+  <h2>Vehicle</h2>
+  <div class="row"><span>Altitude</span><b id="alt">—</b><i>m</i></div>
+  <div class="row"><span>Vertical speed</span><b id="vz">—</b><i>m/s</i></div>
+  <div class="row"><span>Horizontal speed</span><b id="vh">—</b><i>m/s</i></div>
+  <div class="row"><span>Range to target</span><b id="range">—</b><i>m</i></div>
+  <div class="row"><span>Thrust</span><b id="thrust">—</b><i>kN</i></div>
+  <div class="throttle">
+    <div class="band" title="engine throttle band 30–80 %"></div>
+    <div id="throttle-bar"></div>
+    <div class="ticks"><span>0</span><span>30</span><span>80</span><span>100 %</span></div>
+  </div>
+  <div class="row"><span>Tilt from vertical</span><b id="tilt">—</b><i>deg</i></div>
+  <div class="row"><span>Mass (true)</span><b id="mass">—</b><i>kg</i></div>
+  <div class="row"><span>Mass (guidance belief)</span><b id="mhat">—</b><i>kg</i></div>
+  <div class="fuel"><div id="fuel-bar"></div><span id="fuel-text">fuel —</span></div>
+</aside>
+
+<aside id="guidance" class="panel">
+  <h2>Guidance <small id="solver">Problem 4 SOCP</small></h2>
+  <div class="row"><span>Last plan</span><b id="plan-kind">—</b></div>
+  <div class="row"><span>Solve time</span><b id="solve-ms">—</b><i>ms</i></div>
+  <canvas id="solve-spark" width="260" height="56"></canvas>
+  <div class="row"><span>Re-solves</span><b id="resolves">0</b></div>
+  <div class="row"><span>Nominal / fallback</span><b id="nominal">0 / 0</b></div>
+  <div class="row"><span>Mass error ε</span><b id="eps-show">—</b></div>
+  <ol id="log"></ol>
+</aside>
+
+<section id="controls" class="panel">
+  <label>Start
+    <select id="scenario">
+      <option value="mc">Monte Carlo state (1500 m, 2 km downrange)</option>
+      <option value="section_v">Paper Section V state (no fuel margin)</option>
+      <option value="random">Random start</option>
+    </select>
+  </label>
+  <label>Mass error ε <input id="eps" type="range" min="-5" max="5" step="0.5" value="3"><b id="eps-val">+3.0 %</b></label>
+  <label>Speed
+    <select id="speed"><option>0.5</option><option selected>1</option><option>2</option><option>4</option><option>8</option></select>
+  </label>
+  <div class="buttons">
+    <button id="go" class="primary">Launch descent</button>
+    <button id="pause">Pause</button>
+  </div>
+  <div class="cams">
+    <span>Camera</span>
+    <button data-cam="auto" class="on">Auto</button>
+    <button data-cam="chase">Chase</button>
+    <button data-cam="ground">Tracking</button>
+    <button data-cam="pad">Pad</button>
+    <button data-cam="overview">Overview</button>
+    <button data-cam="free">Free</button>
+  </div>
+  <label class="check"><input id="overlays" type="checkbox" checked> Guidance overlays (plan, trail, glide-slope cone)</label>
+</section>
+
+<section id="result" class="panel hidden">
+  <h2 id="result-title">Touchdown</h2>
+  <div class="row"><span>Landing error</span><b id="r-err">—</b><i>m</i></div>
+  <div class="row"><span>Touchdown speed</span><b id="r-spd">—</b><i>m/s</i></div>
+  <div class="row"><span>Fuel used</span><b id="r-fuel">—</b><i>kg</i></div>
+  <div class="row"><span>Re-solves (nominal)</span><b id="r-res">—</b></div>
+  <div class="row"><span>Solve time p50 / max</span><b id="r-ms">—</b><i>ms</i></div>
+  <div class="row"><span>Recursively feasible</span><b id="r-rf">—</b></div>
+  <button id="close-result">Close</button>
+</section>
+
+<div id="help">1–6 cameras · H overlays · Space pause · drag to look (Free)</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
