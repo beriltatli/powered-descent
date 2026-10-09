@@ -322,10 +322,11 @@ function launch() {
 
 // Without viz/server.py (GitHub Pages) there is no solver: replay a flight recorded by viz/record.py,
 // releasing its events on the same sim-time clock the server paces them by.
-const replay = { flight: null, i: 0, t: 0 };
+const replay = { flight: null, i: 0, t: 0, seq: 0 };
 
 async function launchReplay() {
   replay.flight = null;
+  const seq = ++replay.seq;
   const pct = Number($('eps').value);
   let name = $('scenario').value;
   if (name === 'random') name = `random${Math.floor(Math.random() * state.flightIndex.random)}`;
@@ -334,10 +335,11 @@ async function launchReplay() {
     const res = await fetch(`flights/${name}_${pct >= 0 ? '+' : ''}${pct.toFixed(1)}.json`);
     if (!res.ok) throw new Error(res.status);
     const flight = await res.json();
-    if (!state.live) return;
+    if (seq !== replay.seq) return;   // a newer launch superseded this one
     Object.assign(replay, { flight, i: 0, t: 0 });
     onHello(flight.hello);
   } catch {
+    if (seq !== replay.seq) return;
     state.live = false;
     setPhase('NO RECORDING', 'fail');
   }
