@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Paper PDFs stay local: they are under their publishers' copyright (see refs/README.md).
+refs/*.pdf

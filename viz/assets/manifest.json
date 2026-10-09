@@ -1,0 +1,59 @@
+{
+  "ground_primary": {
+    "id": "red_sand",
+    "map": "assets/textures/red_sand/red_sand_diff_2k.jpg",
+    "normalMap": "assets/textures/red_sand/red_sand_nor_gl_2k.jpg",
+    "roughnessMap": "assets/textures/red_sand/red_sand_rough_2k.jpg",
+    "aoMap": "assets/textures/red_sand/red_sand_ao_2k.jpg",
+    "displacementMap": "assets/textures/red_sand/red_sand_disp_2k.jpg",
+    "source": "https://polyhaven.com/a/red_sand",
+    "license": "CC0"
+  },
+  "ground_rocky": {
+    "id": "red_laterite_soil_stones",
+    "map": "assets/textures/red_laterite_soil_stones/red_laterite_soil_stones_diff_2k.jpg",
+    "normalMap": "assets/textures/red_laterite_soil_stones/red_laterite_soil_stones_nor_gl_2k.jpg",
+    "roughnessMap": "assets/textures/red_laterite_soil_stones/red_laterite_soil_stones_rough_2k.jpg",
+    "aoMap": "assets/textures/red_laterite_soil_stones/red_laterite_soil_stones_ao_2k.jpg",
+    "displacementMap": "assets/textures/red_laterite_soil_stones/red_laterite_soil_stones_disp_2k.jpg",
+    "source": "https://polyhaven.com/a/red_laterite_soil_stones",
+    "license": "CC0"
+  },
+  "ground_cracked": {
+    "id": "cracked_red_ground",
+    "map": "assets/textures/cracked_red_ground/cracked_red_ground_diff_2k.jpg",
+    "normalMap": "assets/textures/cracked_red_ground/cracked_red_ground_nor_gl_2k.jpg",
+    "roughnessMap": "assets/textures/cracked_red_ground/cracked_red_ground_rough_2k.jpg",
+    "aoMap": "assets/textures/cracked_red_ground/cracked_red_ground_ao_2k.jpg",
+    "displacementMap": "assets/textures/cracked_red_ground/cracked_red_ground_disp_2k.jpg",
+    "source": "https://polyhaven.com/a/cracked_red_ground",
+    "license": "CC0"
+  },
+  "rocks": [
+    {
+      "id": "moon_rock_01",
+      "gltf": "assets/models/moon_rock_01/moon_rock_01_1k.gltf",
+      "source": "https://polyhaven.com/a/moon_rock_01",
+      "license": "CC0"
+    },
+    {
+      "id": "moon_rock_03",
+      "gltf": "assets/models/moon_rock_03/moon_rock_03_1k.gltf",
+      "source": "https://polyhaven.com/a/moon_rock_03",
+      "license": "CC0"
+    },
+    {
+      "id": "namaqualand_boulder_04",
+      "gltf": "assets/models/namaqualand_boulder_04/namaqualand_boulder_04_1k.gltf",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_04",
+      "license": "CC0"
+    }
+  ],
+  "foil": {
+    "normalMap": "assets/textures/foil_gold_002/Foil002_nor_gl_1k.jpg",
+    "roughnessMap": "assets/textures/foil_gold_002/Foil002_roughness_1k.jpg",
+    "map": "assets/textures/foil_gold_002/Foil002_color_1k.jpg",
+    "source": "https://ambientcg.com/a/Foil002",
+    "license": "CC0"
+  }
+}
