@@ -17,7 +17,7 @@ from server import KW, P, R, VEH, end_event, fly, hello, jsonable, scenario_stat
 
 OUT = Path(__file__).resolve().parent / "flights"
 EPS_PCT = [x / 2 for x in range(-10, 11)]   # the page's slider: -5 % to +5 % in 0.5 % steps
-RANDOM_SEEDS = [11, 23, 37, 41]             # NOT IN PAPER — a few random starts for the static page
+RANDOM_SEEDS = [79, 23, 37, 41]             # NOT IN PAPER — random starts for the static page (seed 11 had no feasible plan)
 STEP_HZ = 20.0
 
 

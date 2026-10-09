@@ -304,6 +304,10 @@ function launch() {
   drawSpark();
   const eps = Number($('eps').value) / 100;
   state.speed = Number($('speed').value);
+  if (!state.serverUp) {
+    launchReplay();
+    return;
+  }
   const qs = new URLSearchParams({ scenario: $('scenario').value, eps, speed: state.speed });
   const es = new EventSource(`/api/fly?${qs}`);
   state.es = es;
@@ -314,6 +318,50 @@ function launch() {
   // EventSource reconnects on its own after the stream closes; that would start a new flight.
   es.onerror = () => { es.close(); if (!state.ended) { state.live = false; setPhase('LINK LOST', 'fail'); } };
   setPhase('CONNECTING', 'live');
+}
+
+// Without viz/server.py (GitHub Pages) there is no solver: replay a flight recorded by viz/record.py,
+// releasing its events on the same sim-time clock the server paces them by.
+const replay = { flight: null, i: 0, t: 0 };
+
+async function launchReplay() {
+  replay.flight = null;
+  const pct = Number($('eps').value);
+  let name = $('scenario').value;
+  if (name === 'random') name = `random${Math.floor(Math.random() * state.flightIndex.random)}`;
+  setPhase('LOADING', 'live');
+  try {
+    const res = await fetch(`flights/${name}_${pct >= 0 ? '+' : ''}${pct.toFixed(1)}.json`);
+    if (!res.ok) throw new Error(res.status);
+    const flight = await res.json();
+    if (!state.live) return;
+    Object.assign(replay, { flight, i: 0, t: 0 });
+    onHello(flight.hello);
+  } catch {
+    state.live = false;
+    setPhase('NO RECORDING', 'fail');
+  }
+}
+
+function pumpReplay(dt) {
+  const F = replay.flight;
+  if (!F || state.ended) return;
+  if (!state.paused) replay.t += dt * state.speed;
+  while (replay.i < F.events.length) {
+    const [kind, data] = F.events[replay.i];
+    if ((kind === 'plan' ? data.t0 : data.t) > replay.t) break;
+    kind === 'plan' ? onPlan(data) : onStep(data);
+    replay.i += 1;
+  }
+  if (replay.i >= F.events.length) onEnd(F.end);
+}
+
+async function probeServer() {
+  try {
+    return (await fetch('/api/health', { cache: 'no-store' })).status === 204;
+  } catch {
+    return false;
+  }
 }
 
 function control(params) {
@@ -442,6 +490,7 @@ const hardContact = () => !!state.endInfo && state.endInfo.status === 'ground_co
 
 function frame(dt) {
   const L = state.lander, env = state.env;
+  pumpReplay(dt);
   let f = null;
   if (state.frames.length) {
     if (!state.paused) state.renderT += dt * state.speed;
@@ -557,7 +606,13 @@ function bindUi() {
 }
 
 async function init() {
-  const manifest = await loadManifest();
+  const [manifest, serverUp] = await Promise.all([loadManifest(), probeServer()]);
+  state.serverUp = serverUp;
+  if (!serverUp) {
+    state.flightIndex = await (await fetch('flights/index.json')).json();
+    document.querySelector('#topbar .brand span').textContent = 'convex guidance · recorded flights';
+    $('help').textContent = `Recorded flights (no solver on this page; run make viz for live solves) · ${$('help').textContent}`;
+  }
   $('loading-text').textContent = 'Building terrain…';
   state.env = await loadEnvironment(manifest);
   state.lander = createLander({ manifest });
