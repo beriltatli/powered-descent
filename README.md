@@ -1,5 +1,9 @@
 <div align="center">
 
+
+Uploading powered-descent-github.mp4…
+
+
 # Powered Descent Guidance
 
 ### Lossless convexification for Mars pinpoint landing — rebuilt from the papers, verified against the theory, measured like flight software, and flown live in 3-D
